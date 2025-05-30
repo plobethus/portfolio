@@ -1,4 +1,4 @@
-// js/include.js
+// js/navbar.js
 document.addEventListener('DOMContentLoaded', async () => {
   //navbar stylesheet
   if(!document.querySelector('link[href="/css/navbar.css"]')) {
@@ -12,7 +12,19 @@ document.addEventListener('DOMContentLoaded', async () => {
   try {
     const resp = await fetch('/includes/navbar.html');
     if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-    document.getElementById('navbar').innerHTML = await resp.text();
+    const container = document.getElementById('navbar');
+    container.innerHTML = await resp.text();
+
+    //mark current link in DOM
+    const path = window.location.pathname;
+    container 
+    .querySelectorAll('a')
+    .forEach(a => {
+      const hrefPath = new URL(a.href).pathname;
+      if (hrefPath === path) {
+        a.classList.add('active');
+      }
+    });
   } catch (err) {
     console.error('Navbar load failed:', err);
   }

@@ -1,3 +1,5 @@
+/* portfolio/css/navbar.css */
+
 /* Add a black background color to the top navigation */
 .navbar {
   background-color: #333;
@@ -21,7 +23,7 @@
 }
 
 /* Add a color to the active/current link */
-.navbar a:active {
+.navbar a.active {
   background-color: #04AA6D;
   color: white;
 }

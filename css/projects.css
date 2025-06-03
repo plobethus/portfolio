@@ -19,9 +19,6 @@ body {
   background-color: #f7f7f7;
 }
 
-/* ===================================================
-   2. Main Container & Title
-   =================================================== */
 
 .projects-container {
   max-width: 1200px;
@@ -36,9 +33,6 @@ body {
   color: #222;
 }
 
-/* ===================================================
-   3. Grid Layout (responsive)
-   =================================================== */
 
 .grid {
   display: grid;
@@ -46,10 +40,6 @@ body {
   gap: 1.5rem;
   margin-top: 2rem;
 }
-
-/* ===================================================
-   4. Individual Card Styles
-   =================================================== */
 
 .card {
   display: flex;
@@ -112,10 +102,6 @@ body {
 .card-link:hover {
   text-decoration: underline;
 }
-
-/* ===================================================
-   5. Responsive Adjustments 
-   =================================================== */
 
 @media (max-width: 480px) {
   .projects-container {

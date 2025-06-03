@@ -1,16 +1,15 @@
-/* portfolio/css/contact.css */
+/* portfolio/css/login.css */
 
 :root {
   --font-sans: "Helvetica Neue", Arial, sans-serif;
-  --color-bg: #fafafa;                
-  --color-card: #fff;                
-  --color-border: #ccc;               
-  --color-text: #333;                 
-  --color-accent: #04AA6D;            
-  --color-button-bg: #04AA6D;         
-  --color-button-hover: #03995a;      
-  --color-error: #d32f2f;             
-  --color-success: #388e3c;          
+  --color-bg: #fafafa;
+  --color-card: #fff;
+  --color-border: #ccc;
+  --color-text: #333;
+  --color-accent: #04AA6D;
+  --color-button-bg: #04AA6D;
+  --color-button-hover: #03995a;
+  --color-error: #d32f2f;
 }
 
 body {
@@ -21,42 +20,30 @@ body {
   color: var(--color-text);
 }
 
-.contact-container {
-  max-width: 600px;
-  margin: 2rem auto;
+.login-container {
+  max-width: 380px;
+  margin: 3rem auto;
   padding: 1rem;
 }
 
-.contact-container h1 {
+.login-container h1 {
   text-align: center;
   margin-bottom: 1.5rem;
   font-size: 2rem;
   color: var(--color-text);
 }
 
-.success,
-.error {
-  max-width: 600px;
-  margin: 0.5rem auto 1.5rem;
+.error-list {
+  list-style: none;
   padding: 0.75rem 1rem;
-  border-radius: 4px;
-  font-weight: bold;
-  text-align: center;
-}
-
-.success {
-  background-color: rgba(56, 142, 60, 0.1);
-  color: var(--color-success);
-  border: 1px solid var(--color-success);
-}
-
-.error {
-  background-color: rgba(211, 47, 47, 0.1);
-  color: var(--color-error);
+  margin-bottom: 1.5rem;
   border: 1px solid var(--color-error);
+  background-color: rgba(211, 47, 47, 0.1); /* red at 10% opacity */
+  color: var(--color-error);
+  border-radius: 4px;
 }
 
-.contact-form {
+.login-form {
   background-color: var(--color-card);
   padding: 2rem;
   border-radius: 6px;
@@ -64,15 +51,14 @@ body {
   border: 1px solid var(--color-border);
 }
 
-.contact-form label {
+.login-form label {
   display: block;
   margin-bottom: 0.4rem;
   font-weight: bold;
   color: var(--color-text);
 }
 
-.contact-form input,
-.contact-form textarea {
+.login-form input {
   width: 100%;
   padding: 0.6rem;
   margin-bottom: 1rem;
@@ -85,15 +71,10 @@ body {
   transition: border-color 0.15s ease;
 }
 
-.contact-form input:focus,
-.contact-form textarea:focus {
+.login-form input:focus {
   outline: none;
   border-color: var(--color-accent);
-  box-shadow: 0 0 0 2px rgba(4, 170, 109, 0.2); 
-}
-
-.contact-form textarea {
-  resize: vertical; 
+  box-shadow: 0 0 0 2px rgba(4, 170, 109, 0.2);
 }
 
 .btn-submit {
@@ -114,11 +95,11 @@ body {
 }
 
 @media (max-width: 480px) {
-  .contact-container {
-    margin: 1rem;
-    padding: 0.5rem;
+  .login-container {
+    margin: 2rem 1rem;
+    padding: 0;
   }
-  .contact-form {
+  .login-form {
     padding: 1rem;
   }
 }

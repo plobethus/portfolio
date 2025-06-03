@@ -1,23 +1,6 @@
-/* portfolio/css/messages.css */
-:root {
-  --font-sans: "Helvetica Neue", Arial, sans-serif;
-  --color-bg: #fafafa;
-  --color-card: #fff;
-  --color-border: #ccc;
-  --color-text: #333;
-  --color-accent: #04AA6D;
-  --color-button-bg: #04AA6D;
-  --color-button-hover: #03995a;
-  --color-error: #d32f2f;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: var(--font-sans);
-  background-color: var(--color-bg);
-  color: var(--color-text);
-}
+/* ─────────────────────────────────────────────────────────────
+   portfolio/css/messages.css
+   ───────────────────────────────────────────────────────────── */
 
 .messages-container {
   max-width: 1000px;
@@ -34,7 +17,7 @@ body {
   padding: 0.75rem 1rem;
   border: 1px solid var(--color-border);
   border-radius: 6px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
 }
 
 .top-bar span {
@@ -93,7 +76,6 @@ body {
     margin: 1rem;
     padding: 0;
   }
-
   .messages-table th,
   .messages-table td {
     font-size: 0.85rem;

@@ -1,25 +1,6 @@
-/* portfolio/css/contact.css */
-
-:root {
-  --font-sans: "Helvetica Neue", Arial, sans-serif;
-  --color-bg: #fafafa;                
-  --color-card: #fff;                
-  --color-border: #ccc;               
-  --color-text: #333;                 
-  --color-accent: #04AA6D;            
-  --color-button-bg: #04AA6D;         
-  --color-button-hover: #03995a;      
-  --color-error: #d32f2f;             
-  --color-success: #388e3c;          
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: var(--font-sans);
-  background-color: var(--color-bg);
-  color: var(--color-text);
-}
+/* ─────────────────────────────────────────────────────────────
+   portfolio/css/contact.css
+   ───────────────────────────────────────────────────────────── */
 
 .contact-container {
   max-width: 600px;
@@ -28,10 +9,9 @@ body {
 }
 
 .contact-container h1 {
+  font-size: 2rem;   
   text-align: center;
   margin-bottom: 1.5rem;
-  font-size: 2rem;
-  color: var(--color-text);
 }
 
 .success,
@@ -58,10 +38,10 @@ body {
 
 .contact-form {
   background-color: var(--color-card);
-  padding: 2rem;
-  border-radius: 6px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 2rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 .contact-form label {
@@ -78,10 +58,9 @@ body {
   margin-bottom: 1rem;
   border: 1px solid var(--color-border);
   border-radius: 4px;
-  font-size: 1rem;
   font-family: var(--font-sans);
   color: var(--color-text);
-  background-color: #fff;
+  background-color: #ffffff;
   transition: border-color 0.15s ease;
 }
 
@@ -89,30 +68,17 @@ body {
 .contact-form textarea:focus {
   outline: none;
   border-color: var(--color-accent);
-  box-shadow: 0 0 0 2px rgba(4, 170, 109, 0.2); 
+  box-shadow: 0 0 0 2px rgba(4, 170, 109, 0.2);
 }
 
 .contact-form textarea {
-  resize: vertical; 
+  resize: vertical;
 }
 
 .btn-submit {
-  display: inline-block;
-  background-color: var(--color-button-bg);
-  color: #fff;
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.15s ease;
 }
 
-.btn-submit:hover,
-.btn-submit:focus {
-  background-color: var(--color-button-hover);
-}
-
+/* Mobile adjustments */
 @media (max-width: 480px) {
   .contact-container {
     margin: 1rem;

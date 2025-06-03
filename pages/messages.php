@@ -45,6 +45,7 @@ $messages = $stmt->fetchAll();
 <head>
   <meta charset="UTF-8" />
   <title>Contact Messages</title>
+  <link rel="stylesheet" href="/css/global.css" />
   <link rel="stylesheet" href="/css/messages.css" />
 
 </head>

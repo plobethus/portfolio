@@ -21,6 +21,7 @@ $csrf_token = $_SESSION['csrf_token'];
 <head>
   <meta charset="UTF-8" />
   <title>Contact Us</title>
+  <link rel="stylesheet" href="/css/global.css" />
   <link rel="stylesheet" href="/css/contact.css" />
   <script src="/js/includeHead.js" defer></script>
 </head>

@@ -82,6 +82,7 @@ $csrf_token = $_SESSION['csrf_token'];
 <head>
   <meta charset="UTF-8" />
   <title>Admin Login</title>
+  <link rel="stylesheet" href="/css/global.css" />
   <link rel="stylesheet" href="/css/login.css" />
 
 </head>

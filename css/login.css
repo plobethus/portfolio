@@ -1,24 +1,6 @@
-/* portfolio/css/login.css */
-
-:root {
-  --font-sans: "Helvetica Neue", Arial, sans-serif;
-  --color-bg: #fafafa;
-  --color-card: #fff;
-  --color-border: #ccc;
-  --color-text: #333;
-  --color-accent: #04AA6D;
-  --color-button-bg: #04AA6D;
-  --color-button-hover: #03995a;
-  --color-error: #d32f2f;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: var(--font-sans);
-  background-color: var(--color-bg);
-  color: var(--color-text);
-}
+/* ─────────────────────────────────────────────────────────────
+   portfolio/css/login.css
+   ───────────────────────────────────────────────────────────── */
 
 .login-container {
   max-width: 380px;
@@ -27,10 +9,9 @@ body {
 }
 
 .login-container h1 {
+  font-size: 2rem;
   text-align: center;
   margin-bottom: 1.5rem;
-  font-size: 2rem;
-  color: var(--color-text);
 }
 
 .error-list {
@@ -38,17 +19,17 @@ body {
   padding: 0.75rem 1rem;
   margin-bottom: 1.5rem;
   border: 1px solid var(--color-error);
-  background-color: rgba(211, 47, 47, 0.1); /* red at 10% opacity */
+  background-color: rgba(211,47,47,0.1);
   color: var(--color-error);
   border-radius: 4px;
 }
 
 .login-form {
   background-color: var(--color-card);
-  padding: 2rem;
-  border-radius: 6px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 2rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 .login-form label {
@@ -64,10 +45,9 @@ body {
   margin-bottom: 1rem;
   border: 1px solid var(--color-border);
   border-radius: 4px;
-  font-size: 1rem;
   font-family: var(--font-sans);
   color: var(--color-text);
-  background-color: #fff;
+  background-color: #ffffff;
   transition: border-color 0.15s ease;
 }
 
@@ -78,20 +58,6 @@ body {
 }
 
 .btn-submit {
-  display: inline-block;
-  background-color: var(--color-button-bg);
-  color: #fff;
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.15s ease;
-}
-
-.btn-submit:hover,
-.btn-submit:focus {
-  background-color: var(--color-button-hover);
 }
 
 @media (max-width: 480px) {

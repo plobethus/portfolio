@@ -1,0 +1,17 @@
+/* ─────────────────────────────────────────────────────────────
+   portfolio/css/about.css
+   ───────────────────────────────────────────────────────────── */
+
+.about-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.about-container h1 {
+  font-size: 2.25rem;
+  margin-bottom: 1rem;
+  color: var(--color-text);
+}
+
+

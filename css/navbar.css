@@ -1,7 +1,9 @@
-/* portfolio/css/navbar.css   */
+/* ─────────────────────────────────────────────────────────────
+   portfolio/css/navbar.css
+   ───────────────────────────────────────────────────────────── */
 
 html, body {
-  margin: 0 !important; 
+  margin: 0 !important;
   padding: 0 !important;
 }
 
@@ -20,11 +22,12 @@ html, body {
 
   font-family: "Helvetica Neue", Arial, sans-serif !important;
   font-size: 17px !important;
-  line-height: 1 !important;     
+  line-height: 1 !important;
 
-  color: #f2f2f2;
-  text-decoration: none;
-  transition: background-color .15s ease, color .15s ease;
+  color: #f2f2f2 !important;
+  text-decoration: none !important;
+  transition: background-color 0.15s ease !important,
+              color 0.15s ease !important;
 }
 
 .navbar a:hover,
@@ -35,5 +38,5 @@ html, body {
 
 .navbar a.active {
   background: #04AA6D !important;
-  color: #fff !important;
+  color: #ffffff !important;
 }

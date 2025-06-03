@@ -29,7 +29,7 @@ $csrf_token = $_SESSION['csrf_token'];
   <div id="navbar"></div>
 
   <main class="contact-container">
-    <h1>Contact Us</h1>
+    <h1>Contact Me</h1>
 
     <?php
     if (!empty($_GET['status']) && $_GET['status'] === 'success') {

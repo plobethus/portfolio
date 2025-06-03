@@ -23,6 +23,7 @@ $csrf_token = $_SESSION['csrf_token'];
   <title>Contact Us</title>
   <link rel="stylesheet" href="/css/global.css" />
   <link rel="stylesheet" href="/css/contact.css" />
+  <link rel="stylesheet" href="css/navbar.css" />
   <script src="/js/includeHead.js" defer></script>
 </head>
 <body>

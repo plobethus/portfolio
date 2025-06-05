@@ -1,0 +1,102 @@
+<!-- portfolio/pages/projects/cuda-solver.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Portfolio</title>
+    <meta name="description" content="Project Template" />
+    <link rel="stylesheet" href="/css/global.css" />
+    <link rel="stylesheet" href="/css/project-details.css" />
+    <link rel="stylesheet" href="/css/prism.css" />
+
+
+    <script src="/js/includeHead.js" defer></script>
+</head>
+
+<body>
+    <div id="navbar"></div>
+    <script src="/js/prism.js"></script>
+
+    <main class="project-detail-container">
+        <h1>My Portfolio Website</h1>
+        <p class="project-intro">
+            This website serves as a personal showcase of my software development work, writing, and research.
+            It's a fully hand-coded site that prioritizes performance, security, and maintainability across the full
+            stack.
+        </p>
+
+        <!-- ── Overview ───────────────────────── -->
+        <section class="project-section">
+            <h2>Overview</h2>
+            <p>
+                This project was built entirely from scratch using standard web technologies — HTML, CSS, JavaScript,
+                and PHP — without any frontend frameworks.
+                It’s hosted on an Apache server and backed by a MariaDB database for secure message storage via the
+                contact form.
+                I also implemented Cloudflare to provide HTTPS, CDN caching, and basic DDoS protection.
+                Another thing I included is prism.js for syntax hilighting in my project pages. 
+            </p>
+            <p>
+                My goal was to create a fast, accessible, and responsive site that I fully control — every part of the
+                stack is open and transparent.
+            </p>
+        </section>
+
+        <section class="project-section">
+            <h2> Hosting </h2>
+            <p> This website is completely self hosted</p>
+            <figure>
+                <img src="/images/portfolio/server.jpg" alt="Photograph of my Server" class="project-img" />
+                <figcaption class="img-caption">You are being served from this computer!</figcaption>
+            </figure>
+        </section>
+
+        <!-- ── Key Code Snippet ───────────────── -->
+        <section class="project-section">
+            <h2>Key Code Snippet</h2>
+            <pre class="line-numbers"><code class="language-html">
+&lt;form action="/php/submit_contact.php" method="POST"&gt;
+  &lt;input type="hidden" name="csrf_token" value="..." /&gt;
+  &lt;label for="name"&gt;Name&lt;/label&gt;
+  &lt;input id="name" name="name" required /&gt;
+  ...
+&lt;/form&gt;
+    </code></pre>
+            <p>
+                This form securely submits user messages to a backend PHP script with CSRF protection and server-side
+                validation. Messages are stored in MariaDB.
+            </p>
+        </section>
+
+        <!-- ── Stack & Security ────────────────── -->
+        <section class="project-section">
+            <h2>Stack & Security Features</h2>
+            <ul>
+                <li><strong>Frontend:</strong> HTML5, CSS (no frameworks), vanilla JavaScript</li>
+                <li><strong>Backend:</strong> PHP 8 with best-practice session/cookie security</li>
+                <li><strong>Database:</strong> MariaDB for storing contact messages</li>
+                <li><strong>Web server:</strong> Apache with HTTPS via Cloudflare</li>
+                <li><strong>Security:</strong> CSRF tokens, input sanitization, secure session management</li>
+            </ul>
+        </section>
+
+        <!-- ── GitHub / Source Link ────────────── -->
+        <section class="project-section">
+            <h2>Source Code</h2>
+            <p>
+                You can explore the source code and deployment configs for this site on my
+                <a href="https://github.com/plobethus/portfolio" target="_blank" rel="noopener noreferrer">
+                    GitHub repository
+                </a>.
+            </p>
+        </section>
+
+        <a class="back-link" href="../projects.html">← Back to Projects</a>
+    </main>
+
+    <script src="/js/navbar.js" defer></script>
+</body>
+
+</html>

@@ -1,32 +1,66 @@
 <!-- portfolio/index.html -->
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio Website</title>
-    <meta name="description" content = "Portfolio of Henry Moran showcasing projects and work done">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Henry Moran | Portfolio</title>
+    <meta name="description" content="Henry Moran – Real Time and Embedded systems researcher, developer, and blogger.">
+
     <link rel="stylesheet" href="/css/global.css" />
     <link rel="stylesheet" href="/css/index.css" />
-    <link rel="stylesheet" href="css/navbar.css" />
-    <link rel="icon" href="favicon.ico" />
-    <script src="/js/includeHead.js"></script>
 
-
+    <script src="/js/includeHead.js" defer></script>
 </head>
+
 <body>
-    <script src="/js/prism.js"></script>
-    <!-- navbar -->
-     <div id="navbar"></div>
-    <main>
-        <h1>Welcome!</h1>
-        <p>I am a senior computer science student at the University of Houston.</p>
+    <header id="navbar"></header>
+    <script src="/js/navbar.js" defer></script>
 
+    <main class="container p-1">
+        <section class="text-center mt-1 mb-1">
+            <h1 class="mb-1">Hi, I'm Henry.</h1>
 
+        </section>
 
+        <!-- ── Highlighted Project ────────────────────── -->
+        <section class="card mb-1">
+            <h2 class="mb-1">Featured Project: CUDA Linear Solver</h2>
+            <div class="project-highlight">
+                <img src="/images/cuda-solver-images/cuda-solver-thumbnail.png" alt="CUDA Solver thumbnail"
+                    class="project-thumb" />
+                <div class="project-text">
+                    <p>
+                        A high performance dense linear solver written in CUDA. Additionally comes with a CPU and a Naive GPU version, for comparison.
+                    </p>
+                    <div class="btn-row">
+                        <a class="btn btn-primary" href="/pages/projects/cuda-solver.html">Explore Project →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <!-- ── Highlighted Blog Post ──────────────────── -->
+        <section class="card mb-1">
+            <h2 class="mb-1">Latest Blog Post</h2>
+            <div class="project-highlight">
+                <img src="/images/blog/sample-post-1.jpg" alt="Understanding CUDA Memory Coalescing thumbnail"
+                    class="project-thumb" />
+                <div class="project-text">
+                    <h3 class="card-title">Understanding CUDA Memory Coalescing</h3>
+                    <div class="card-meta">April 1, 2025</div>
+                    <p class="card-excerpt">
+                        Bro i ain't written nothing for this yet
+                    </p>
+                    <div class="btn-row">
+                        <a class="btn btn-primary" href="/blog/blogpage.html">Read More →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
-
-    <script src="/js/navbar.js"></script>
 </body>
+
 </html>

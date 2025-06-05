@@ -1,25 +1,68 @@
 <!-- portfolio/pages/about.html-->
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Me</title>
-    <meta name="description" content = "About Henry Moran">
-    <link rel="stylesheet" href="/css/global.css" />
-    <link rel="stylesheet" href="css/about.css" />
-    <link rel="stylesheet" href="css/navbar.css" />
-    <script src="/js/includeHead.js"></script>
 
+<head>
+    <meta charset="utf-8">
+    <title>About Me | Henry Moran</title>
+
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/about.css">
+
+    <script src="/js/includeHead.js" defer></script>
 </head>
+
 <body>
-    <!-- navbar -->
-     <div id="navbar"></div>
-    <main>
-        <h1>About Me</h1>
-        
+    <header id="navbar"></header>
+    <script src="/js/navbar.js" defer></script>
+
+    <main class="container p-1">
+        <section class="card intro mb-1">
+            <div class="intro-grid">
+                <img id="profile-photo" src="/images/profile/profile1.jpg" alt="Photo of Henry Moran"
+                    class="profile-photo" width="180" height="180">
+
+                <p class="bio">
+                    I'm Henry, a computer-science student at the University of Houston (class of&nbsp;2025).
+                    My focus is real-time &amp; embedded systems; this summer I’m part of the RTES research group.
+                </p>
+            </div>
+        </section>
+
+        <section class="details-grid">
+            <article class="card">
+                <h2 class="text-center mb-1">Résumé</h2>
+                <iframe class="resume-scroll" src="/documents/resume.pdf" title="Résumé"></iframe>
+            </article>
+
+            <aside class="card">
+                <h2 class="text-center mb-1">GitHub Stats</h2>
+                <img class="github-img mb-1"
+                    src="https://github-readme-stats.vercel.app/api?username=plobethus&show_icons=true&hide_rank=true"
+                    alt="GitHub statistics">
+                <img class="github-img"
+                    src="https://github-readme-stats.vercel.app/api/top-langs/?username=plobethus&layout=compact"
+                    alt="Top languages used">
+            </aside>
+        </section>
+        <section class="card text-center mt-1 p-1">
+            <h2>Connect with Me</h2>
+            <div class="social-links">
+                <a href="https://github.com/plobethus" target="_blank" rel="noopener noreferrer">
+                    <img src="/images/profile/github.svg" alt="GitHub" width="32" height="32">
+                </a>
+                <a href="https://linkedin.com/in/plobethus" target="_blank" rel="noopener noreferrer">
+                    <img src="/images/profile/linkedin.svg" alt="LinkedIn" width="32" height="32">
+                </a>
+                <a href="mailto:hmoran@email.com">
+                    <img src="/images/profile/mail.svg" alt="Email" width="32" height="32">
+                </a>
+            </div>
+        </section>
     </main>
 
-    <script src="/js/navbar.js"></script>
+    <script src="/js/profile.js" defer></script>
 </body>
+
 </html>

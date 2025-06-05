@@ -1,27 +1,19 @@
-// js/navbar.js
-document.addEventListener('DOMContentLoaded', async () => {
-  //navbar stylesheet
-  if(!document.querySelector('link[href="/css/navbar.css"]')) {
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = '/css/navbar.css';
-    document.head.appendChild(link);
-  }
+// portfolio/js/navbar.js
 
-  //fetches and inserts navbar html
+document.addEventListener('DOMContentLoaded', async () => {
   try {
+    // Load navbar HTML into <header id="navbar">
     const resp = await fetch('/includes/navbar.html');
     if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+
     const container = document.getElementById('navbar');
     container.innerHTML = await resp.text();
 
-    //mark current link in DOM
-    const path = window.location.pathname;
-    container 
-    .querySelectorAll('a')
-    .forEach(a => {
-      const hrefPath = new URL(a.href).pathname;
-      if (hrefPath === path) {
+    // Highlight active link based on current URL path
+    const currentPath = window.location.pathname;
+    container.querySelectorAll('a').forEach(a => {
+      const linkPath = new URL(a.href, window.location.origin).pathname;
+      if (linkPath === currentPath) {
         a.classList.add('active');
       }
     });

@@ -23,12 +23,12 @@ $csrf_token = $_SESSION['csrf_token'];
   <title>Contact Us</title>
   <link rel="stylesheet" href="/css/global.css" />
   <link rel="stylesheet" href="/css/contact.css" />
-  <link rel="stylesheet" href="css/navbar.css" />
   <script src="/js/includeHead.js" defer></script>
 </head>
 <body>
 
   <div id="navbar"></div>
+  <script src="/js/navbar.js" defer></script>
 
   <main class="contact-container">
     <h1>Contact Me</h1>
@@ -79,6 +79,5 @@ $csrf_token = $_SESSION['csrf_token'];
       <button type="submit" class="btn-submit">Send Message</button>
     </form>
   </main>
-  <script src="/js/navbar.js" defer></script>
 </body>
 </html>

@@ -19,7 +19,7 @@
   padding: 0.75rem 1rem;
   margin-bottom: 1.5rem;
   border: 1px solid var(--color-error);
-  background-color: rgba(211,47,47,0.1);
+  background-color: rgba(211, 47, 47, 0.1);
   color: var(--color-error);
   border-radius: 4px;
 }
@@ -29,7 +29,7 @@
   border: 1px solid var(--color-border);
   border-radius: 6px;
   padding: 2rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .login-form label {
@@ -57,14 +57,14 @@
   box-shadow: 0 0 0 2px rgba(4, 170, 109, 0.2);
 }
 
-.btn-submit {
-}
+.btn-submit {}
 
 @media (max-width: 480px) {
   .login-container {
     margin: 2rem 1rem;
     padding: 0;
   }
+
   .login-form {
     padding: 1rem;
   }

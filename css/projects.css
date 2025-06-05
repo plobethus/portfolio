@@ -2,94 +2,27 @@
    portfolio/css/projects.css
    ───────────────────────────────────────────────────────────── */
 
-.projects-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-}
-
 .projects-container h1 {
   font-size: 2.5rem;
   text-align: center;
   margin-bottom: 1rem;
-  color: #222222;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
-}
-
-.card {
-  display: flex;
-  flex-direction: column;
-  background-color: var(--color-card);
-  border-radius: 0.5rem;
-  overflow: hidden;
-  text-decoration: none;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.card:hover,
-.card:focus-within {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-.card-image {
-  width: 100%;
-  background-color: #dddddd;
-}
-
-.card-image img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  display: block;
-}
-
-.card-content {
-  padding: 1rem;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
+  color: #222
 }
 
 .card-title {
   font-size: 1.25rem;
-  margin-bottom: 0.5rem;
-  color: #111111;
+  margin-bottom: .5rem;
+  color: #111
 }
 
 .card-description {
   flex-grow: 1;
-  font-size: 0.95rem;
-  color: #555555;
+  font-size: .95rem;
+  color: #555
 }
 
-.card-link {
-  margin-top: 1rem;
-  font-weight: bold;
-  color: var(--color-accent);
-  text-decoration: none;
-  font-size: 0.95rem;
-}
-
-.card-link:hover {
-  text-decoration: underline;
-}
-
-@media (max-width: 480px) {
-  .projects-container {
-    padding: 1rem 0.5rem;
-  }
+@media(max-width:480px) {
   .projects-container h1 {
-    font-size: 2rem;
-  }
-  .card-image img {
-    height: 140px;
+    font-size: 2rem
   }
 }

@@ -1,17 +1,77 @@
-/* ─────────────────────────────────────────────────────────────
+/* ───────────────────────────────────────────
    portfolio/css/about.css
-   ───────────────────────────────────────────────────────────── */
+   ─────────────────────────────────────────── */
 
-.about-container {
-  max-width: 800px;
-  margin: 2rem auto;
-  padding: 1rem;
+.intro-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    align-items: center;
 }
 
-.about-container h1 {
-  font-size: 2.25rem;
-  margin-bottom: 1rem;
-  color: var(--color-text);
+.profile-photo {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover
 }
 
+.bio {
+    line-height: var(--line-height-base)
+}
 
+/* 2. Résumé + GitHub stats */
+.details-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1rem
+}
+
+.resume-scroll {
+    width: 100%;
+    height: 600px;
+    border: 0;
+    overflow-y: auto
+}
+
+.github-img {
+    width: 100%;
+    display: block;
+    margin-bottom: .75rem
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.social-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.social-links a:hover {
+  transform: scale(1.1);
+}
+
+/* Responsive */
+@media(max-width:768px) {
+    .details-grid {
+        grid-template-columns: 1fr
+    }
+}
+
+@media(max-width:600px) {
+    .intro-grid {
+        grid-template-columns: 1fr;
+        text-align: center
+    }
+
+    .profile-photo {
+        margin: 0 auto 1rem
+    }
+}

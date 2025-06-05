@@ -1,0 +1,63 @@
+.project-highlight {
+  display: flex;
+  gap: 1.5rem;
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+
+.project-thumb {
+  width: 320px;
+  height: 200px;
+  background-color: #f0f0f0; /* fallback bg */
+  object-fit: cover;
+  border-radius: .5rem;
+  flex-shrink: 0;
+}
+
+.blog-thumb {
+  /* Optional if you don’t use a real image */
+  display: none;
+}
+
+.project-text, .blog-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 240px;
+}
+
+.btn-row {
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: .5rem;
+}
+
+.card-meta {
+  font-size: .9rem;
+  color: #777;
+  margin-bottom: .75rem;
+}
+
+.card-excerpt {
+  font-size: .95rem;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+  .project-highlight {
+    flex-direction: column;
+  }
+  .project-thumb {
+    width: 100%;
+    height: 180px;
+  }
+}

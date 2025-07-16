@@ -11,21 +11,12 @@
   box-shadow: 0 6px 15px rgba(0, 0, 0, .08);
 }
 
-.project-detail-container::before {
-  content: "";
-  display: block;
-  height: 4px;
-  width: 60px;
-  border-radius: 4px;
-  background: var(--color-accent);
-  margin-bottom: 1.25rem;
-}
-
+/* Page title */
 .project-detail-container h1 {
   font-size: 2.25rem;
   margin-bottom: 1rem;
   font-weight: 700;
-  color: #222;
+  color: var(--color-text);           /* was #222 */
 }
 
 .project-detail-container h2 {
@@ -38,7 +29,7 @@
 .project-detail-container .project-intro,
 .project-detail-container .project-section p {
   font-size: 1rem;
-  color: #555;
+  color: var(--color-card-text);      /* was #555 */
 }
 
 .project-detail-container .project-intro {

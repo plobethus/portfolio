@@ -1,0 +1,99 @@
+<!-- portfolio/pages/blog/<your-slug>.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- ── SEO & meta ─────────────────────────────────────────────── -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title><!-- BLOG-TITLE --></title>
+    <meta name="description" content="<!-- 140-char summary for search & social -->" />
+
+    <!-- ── Styles ──────────────────────────────────────────────────── -->
+    <link rel="stylesheet" href="/css/global.css" />
+    <link rel="stylesheet" href="/css/blog_details.css" />
+    <link rel="stylesheet" href="/css/prism.css" />       <!-- code highlighting -->
+
+    <!-- optional social meta (twitter / opengraph) -->
+    <!--
+    <meta property="og:title" content="Blog post title" />
+    <meta property="og:description" content="Short description" />
+    <meta property="og:image" content="/images/blog/preview.png" />
+    <meta property="og:type" content="article" />
+    -->
+
+    <script src="/js/includeHead.js" defer></script>      <!-- favicons etc. -->
+</head>
+
+<body>
+    <header id="navbar"></header>
+
+    <!-- ── Main article container ─────────────────────────────────── -->
+    <main class="blog-detail-container">
+
+        <!-- ——— Title & metadata ——— -->
+        <h1><!-- BLOG-TITLE --></h1>
+        <div class="post-meta">
+            <span><!-- ✍ Author -->Henry Moran</span>•
+            <span><!-- 📅 Date -->July 19, 2025</span>•
+            <span><!-- ⏱ Read time -->5 min&nbsp;read</span>
+        </div>
+
+        <!-- ——— Hero / cover image (optional) ——— -->
+        <!--
+        <figure>
+            <img src="/images/bl" alt="Descriptive alt text" class="post-image">
+            <figcaption>Optional caption describing the image.</figcaption>
+        </figure>
+        -->
+
+        <!-- ——— Post body ——— -->
+        <section>
+            <h2>Introduction</h2>
+            <p>
+                Write a friendly opener that tells readers <em>why</em> this topic matters.
+                Keep sentences short &amp; concrete.
+            </p>
+
+            <blockquote>
+                “A concise quote or key takeaway can break up text and add punch.”
+            </blockquote>
+
+            <h2>Main section heading</h2>
+            <p>
+                Longer paragraphs explaining your ideas.  Use <code>&lt;code&gt;</code> tags for
+                inline snippets and fenced blocks for big examples.
+            </p>
+
+            <pre class="line-numbers"><code class="language-bash">
+# Example shell snippet
+meson setup builddir --prefix=$HOME/.local
+meson compile -C builddir
+meson install -C builddir
+            </code></pre>
+
+            <h2>Another heading</h2>
+            <p>
+                When you need a list:
+            </p>
+            <ul>
+                <li>First bullet</li>
+                <li>Second bullet</li>
+                <li>…</li>
+            </ul>
+
+            <p>
+                Wrap up with a call to action or summary. Need to cite the source?
+                <a href="https://github.com/yourusername/your-repo" target="_blank" rel="noopener">Link it here</a>.
+            </p>
+        </section>
+
+        <!-- ——— Back link ——— -->
+        <a class="back-link" href="../blog.html">← Back&nbsp;to&nbsp;Blog</a>
+    </main>
+
+    <!-- ── Scripts ────────────────────────────────────────────────── -->
+    <script src="/js/prism.js"></script>   <!-- syntax highlighter -->
+    <script src="/js/navbar.js" defer></script>
+</body>
+</html>

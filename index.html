@@ -2,65 +2,120 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Henry Moran | Portfolio</title>
-    <meta name="description" content="Henry Moran – Real Time and Embedded systems researcher, developer, and blogger.">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Henry Moran | Portfolio</title>
+  <meta name="description"
+        content="Henry Moran – Real Time and Embedded systems researcher, developer, and blogger.">
 
-    <link rel="stylesheet" href="/css/global.css" />
-    <link rel="stylesheet" href="/css/index.css" />
+  <link rel="stylesheet" href="/css/global.css" />
+  <link rel="stylesheet" href="/css/index.css" />
 
-    <script src="/js/includeHead.js" defer></script>
+  <script src="/js/includeHead.js" defer></script>
 </head>
 
 <body>
-    <header id="navbar"></header>
+  <header id="navbar"></header>
 
-    <main class="container p-1">
-        <section class="text-center mt-1 mb-1">
-            <h1 class="mb-1">Hi, I'm Henry.</h1>
+  <main class="container p-1">
 
-        </section>
-        <!-- 320x 200-->
-        <!-- ── Highlighted Project ────────────────────── -->
-        <section class="card mb-1">
-            <h2 class="mb-1">Featured Project: My Portfolio Website</h2>
-            <div class="project-highlight">
-                <img src="/images/portfolio/indexphoto.png" alt="Website Photo" 
-                    class="project-thumb" />
-                <div class="project-text">
-                    <p>
-                        This beautiful website you are looking at right now!!
-                    </p>
-                    <div class="btn-row">
-                        <a class="btn btn-primary" href="/pages/projects/portfolio.html">Explore Project →</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <!-- ── Hero intro ───────────────────────────────────────── -->
+    <section class="text-center mt-1 mb-1">
+      <h1 class="mb-1">Hi, I'm Henry.</h1>
+    </section>
 
-        <!-- ── Highlighted Blog Post ──────────────────── -->
-        <section class="card mb-1">
-            <h2 class="mb-1">Latest Blog Post</h2>
-            <div class="project-highlight">
-                <img src="/images/blog/sample-post-1.jpg" alt="Understanding CUDA Memory Coalescing thumbnail"
-                    class="project-thumb" />
-                <div class="project-text">
-                    <h3 class="card-title">Understanding CUDA Memory Coalescing</h3>
-                    <div class="card-meta">April 1, 2025</div>
-                    <p class="card-excerpt">
-                        Bro i ain't written nothing for this yet
-                    </p>
-                    <div class="btn-row">
-                        <a class="btn btn-primary" href="/blog/blogpage.html">Read More →</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-    <script src="/js/navbar.js?v=99" defer></script>
+    <!-- ── Highlighted Project ──────────────────────────────── -->
+    <section class="card mb-1">
+      <h2 class="mb-1">Featured Project: My Portfolio Website</h2>
+      <div class="project-highlight">
+        <img src="/images/portfolio/indexphoto.png"
+             alt="Website Photo"
+             class="project-thumb" />
+        <div class="project-text">
+          <p>This beautiful website you are looking at right now!!</p>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="/pages/projects/portfolio.html">Explore Project →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Highlighted Blog Post ────────────────────────────── -->
+    <section class="card mb-1">
+      <h2 class="mb-1">Latest Blog Post</h2>
+      <div class="project-highlight">
+        <img src="/images/blog/sample-post-1.jpg"
+             alt="Understanding that there is no blog post"
+             class="project-thumb" />
+        <div class="project-text">
+          <h3 class="card-title">No blog post here!</h3>
+          <div class="card-meta">April&nbsp;1,&nbsp;2025</div>
+          <p class="card-excerpt">
+            There is no blog post… but you can look at my beautiful 404 kitty!
+          </p>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="404.html">Read More →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Cool Websites ────────────────────────────────────── -->
+    <section id="cool-sites" class="mt-1">
+      <h2 class="section-title mb-1">My Favorite Websites</h2>
+
+      <div class="grid cool-sites-grid">
+        
+        <a href="https://neal.fun/" target="_blank" rel="noopener"
+           class="card cool-site-card">
+          <div class="card-content">
+            <h3 class="card-title">Neal.fun</h3>
+            <p class="card-description">
+              Interactive mini-experiments about <em>everything</em> from
+              deep-sea creatures to the size of the universe.
+            </p>
+          </div>
+        </a>
+
+        
+        <a href="https://radio.garden" target="_blank" rel="noopener"
+           class="card cool-site-card">
+          <div class="card-content">
+            <h3 class="card-title">Radio Garden</h3>
+            <p class="card-description">
+              Spin a 3-D globe and tune in to live radio stations anywhere on Earth.
+            </p>
+          </div>
+        </a>
+
+        <a href="https://ebookfoundation.github.io/free-programming-books/" target="_blank" rel="noopener"
+           class="card cool-site-card">
+          <div class="card-content">
+            <h3 class="card-title">Programming E-Books</h3>
+            <p class="card-description">
+              Freely available programming E-books
+            </p>
+          </div>
+        </a>
+
+        <a href="https://www.nelsonarcher.com/uhcs-disc" target="_blank" rel="noopener"
+           class="card cool-site-card">
+          <div class="card-content">
+            <h3 class="card-title">UH Discords List</h3>
+            <p class="card-description">
+              A list of discords related to UH computer science classes
+            </p>
+          </div>
+        </a>
+
+
+        <!-- Duplicate & edit these cards for more sites -->
+      </div>
+    </section>
+    <!-- ── /Cool Websites ───────────────────────────────────── -->
+  </main>
+
+  <script src="/js/navbar.js?v=99" defer></script>
 </body>
-
 </html>

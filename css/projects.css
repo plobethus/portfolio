@@ -29,3 +29,38 @@
         font-size: 2rem;
     }
 }
+/* 2-column responsive grid for project cards */
+.projects-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);   /* always 2 across on desktop */
+    gap: 1.5rem;                              /* space between cards */
+    max-width: 1200px;                        /* keep grid centred */
+    margin-inline: auto;
+}
+
+/* single column when the viewport is narrow */
+@media (max-width: 640px){
+    .projects-grid{
+        grid-template-columns: 1fr;
+    }
+}
+
+/* let card contents stretch evenly */
+.card{
+    display: flex;
+    flex-direction: column;
+}
+
+.projects-grid .card img{
+    width: 100%;          /* no more overspill */
+    height: auto;         /* keep the aspect-ratio */
+    display: block;       /* strips default inline-image gaps */
+    border-radius: 4px;   /* optional: matches your card corners */
+}
+
+/* Optional: give all thumbnails the same HEIGHT
+   (creates a cleaner masonry look). 200-250 px works well. */
+.projects-grid .card img{
+    height: 220px;        /* choose any value you like */
+    object-fit: cover;    /* crops edges while preserving ratio */
+}

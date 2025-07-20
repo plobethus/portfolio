@@ -1,0 +1,109 @@
+<!-- portfolio/pages/projects/greybird-chalk.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Greybird‑Chalk Dark GTK Theme</title>
+    <meta name="description"
+        content="A dark‑mode Greybird spin‑off that re‑imagines the classic XFCE theme with the Chalkboard palette." />
+
+    <!-- Shared styles -->
+    <link rel="stylesheet" href="/css/global.css" />
+    <link rel="stylesheet" href="/css/project-details.css" />
+    <link rel="stylesheet" href="/css/prism.css" />
+
+    <script src="/js/includeHead.js" defer></script>
+</head>
+
+<body>
+    <div id="navbar"></div>
+    <script src="/js/prism.js"></script>
+
+    <main class="project-detail-container">
+        <h1>Greybird‑Chalk Dark</h1>
+        <p class="project-intro">
+            <strong>Greybird‑Chalk</strong> is a dark GTK/Xfwm4 theme that fuses the beloved
+            <em>Greybird</em> layout with the cosy pastel hues of the <em>Chalkboard</em> VS Code palette.
+            It delivers a unified look across GTK 3 apps, XFCE panels and window decorations—all while
+            keeping Greybird’s trademark legibility and small‑details polish.
+        <p>
+            The inspiration for this project was the visual studio theme <a
+                href="https://marketplace.visualstudio.com/items?itemName=kenziebottoms.chalkboard" target="_blank"
+                rel="noopener noreferrer">
+                Chalkboard
+            </a>by McKenzie Bottoms. After I installed this theme and fell in love with it in visual studio, I decided
+            my terminal should look the same.
+            After creating a terminal scheme for the XFCE terminal, my next target was the xfce desktop itself. I was
+            already using Greybird-dark, so by editing the Greybird
+            repository I was able to create Greybird-Chalk.
+        </p>
+        <p> P.S. - I also styled this website with the Chalkboard color scheme. </p>
+        </p>
+
+        <section class="project-section">
+            <h2>Overview</h2>
+            <p>
+                Built on top of the <code>greybird</code> upstream sources, this repository:
+            </p>
+            <ul class="mt-1">
+                <li>Switches to a pastel‑on‑charcoal colour scheme (Charleston Green base).</li>
+                <li>Ships <code>gtk‑3.0</code>, <code>gtk‑2.0</code>, <code>xfwm4</code>, Metacity,
+                    Openbox and Plank assets for <em>full</em> desktop coverage.</li>
+                <li>Adds a one‑click <code>Greybird‑Chalk‑Dark</code> metatheme so Appearance managers pick it up
+                    cleanly.</li>
+                <li>Keeps Greybird’s compact paddings, subtle shadows and accessibility tweaks.</li>
+            </ul>
+        </section>
+
+        <section class="project-section">
+            <h2>Palette at a glance</h2>
+            <pre class="line-numbers"><code class="language-json">{
+  "base"   : "#1F2D2D", // Charleston Green
+  "blue"   : "#BDEAFF", // Diamond
+  "yellow" : "#FFFCA4", // Canary
+  "green"  : "#C8FF9B", // Mint Green
+  "pink"   : "#FFB0B0"  // Melon
+}</code></pre>
+            <p>The colours above map onto <code>$base_color</code>, selection tints, info bars and
+                semantic feedback (error / warning / success).</p>
+        </section>
+
+        <section class="project-section">
+            <h2>Installation</h2>
+            <ol>
+                <li><code>git clone https://github.com/henrymoran/greybird‑chalk.git</code></li>
+                <li><code>meson setup builddir --prefix="$HOME/.local"</code></li>
+                <li><code>meson compile -C builddir &amp;&amp; meson install -C builddir</code></li>
+                <li>Select <em>Greybird‑Chalk‑Dark</em> in <kbd>Settings ▸ Appearance</kbd>.</li>
+            </ol>
+        </section>
+
+        <figure>
+            <img src="/images/greybird-chalk-preview.png"
+                alt="Screenshot showing Greybird‑Chalk applied to XFCE desktop and GNOME Software window"
+                class="project-img" />
+            <figcaption class="img-caption">Greybird‑Chalk brings a consistent pastel dark‑mode to both XFCE core apps
+                and GTK software like GNOME Software.</figcaption>
+        </figure>
+
+
+        <section class="project-section">
+            <h2>Roadmap</h2>
+            <ul>
+                <li>GTK 3 parity with upstream Greybird</li>
+                <li>XFwm4 Styling</li>
+                <li>Gnome and XFwm4 Terminal Theme</li>
+                <li>Flat‑headerbar styling for libadwaita apps</li>
+                <li>Fixing dark-mode for gtk-4 apps (in progress, contributions welcome)</li>
+            </ul>
+        </section>
+
+        <a class="back-link" href="../projects.html">← Back to Projects</a>
+    </main>
+
+    <script src="/js/navbar.js" defer></script>
+</body>
+
+</html>

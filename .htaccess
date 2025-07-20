@@ -1,0 +1,16 @@
+# Stop directory listings
+Options -Indexes
+
+# Pretty URLs – serve /about instead of /about.html
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME}.html -f
+  RewriteRule ^(.+)$ $1.html [L]
+</IfModule>
+
+<IfModule mod_negotiation.c>
+  Options -MultiViews
+</IfModule>
+
+ErrorDocument 404 /404.html

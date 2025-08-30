@@ -36,6 +36,7 @@ $rows = $q->fetchAll();
   <meta charset="utf-8">
   <title>Review Discord Submissions</title>
   <link rel="stylesheet" href="/css/global.css">
+  <link rel="stylesheet" href="/css/review_discords.css?v=1">
   <style>
     table{border-collapse:collapse;width:100%}
     th,td{border:1px solid #ddd;padding:.5rem;vertical-align:top}

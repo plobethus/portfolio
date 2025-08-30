@@ -1,0 +1,136 @@
+
+:root{
+  --bg: #0d1117;
+  --fg: #e6edf3;
+  --muted:#8b949e;
+  --card:#161b22;
+  --border:#30363d;
+  --rowAlt:#0f141b;
+  --accent:#2f81f7;
+  --success:#1f6f43;
+  --success-bg:#132d1f;
+  --danger:#9e1c1c;
+  --danger-bg:#2c1212;
+  --pill:#22272e;
+}
+
+@media (prefers-color-scheme: light){
+  :root{
+    --bg:#ffffff; --fg:#111418; --muted:#667085; --card:#f8fafc;
+    --border:#e5e7eb; --rowAlt:#f6f7f9; --accent:#1d4ed8;
+    --success:#166534; --success-bg:#e8f5ec; --danger:#b91c1c; --danger-bg:#fdeaea;
+    --pill:#eef2f6;
+  }
+}
+
+html, body{
+  background:var(--bg);
+  color:var(--fg);
+  font: 16px/1.5 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+  margin:0;
+}
+
+h1{
+  margin:16px auto;
+  max-width:1150px;
+  padding:0 16px;
+  font-size:clamp(20px, 2.4vw, 28px);
+  font-weight:700;
+}
+
+/* Keep table scrollable on small screens */
+.table-wrap{
+  max-width:1150px;
+  margin:12px auto 24px;
+  padding:0 16px;
+  overflow:auto;
+  background:transparent;
+}
+
+/* Table */
+table{
+  border-collapse:separate; border-spacing:0;
+  width:100%;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  overflow:hidden;
+}
+
+thead th{
+  position:sticky; top:0;
+  background:var(--card);
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:.04em;
+  font-size:.78rem;
+  font-weight:700;
+  padding:12px;
+  border-bottom:1px solid var(--border);
+  text-align:left;
+}
+
+tbody td{
+  padding:12px;
+  border-bottom:1px solid var(--border);
+  vertical-align:top;
+  font-size:.95rem;
+}
+
+tbody tr:nth-child(even){
+  background:var(--rowAlt);
+}
+
+tbody tr:hover{
+  background:color-mix(in oklab, var(--accent) 12%, transparent);
+}
+
+/* Links */
+a{
+  color:var(--accent);
+  text-decoration:none;
+}
+a:hover, a:focus{ text-decoration:underline; }
+
+/* Pills */
+.pill{
+  display:inline-block;
+  border-radius:999px;
+  font-size:.8rem;
+  padding:.25rem .55rem;
+  background:var(--pill);
+  color:var(--muted);
+  border:1px solid var(--border);
+}
+
+.pill.approved{
+  background:var(--success-bg);
+  color:var(--fg);
+  border-color:color-mix(in oklab, var(--success) 40%, var(--border));
+}
+.pill.suspended{
+  background:var(--danger-bg);
+  color:var(--fg);
+  border-color:color-mix(in oklab, var(--danger) 40%, var(--border));
+}
+
+/* Buttons */
+button{
+  appearance:none;
+  border:1px solid var(--border);
+  background:var(--card);
+  color:var(--fg);
+  padding:.45rem .7rem;
+  border-radius:8px;
+  font-size:.9rem;
+  cursor:pointer;
+}
+button:hover{ border-color:var(--accent); }
+form{ display:inline-block; }
+
+/* Utility */
+.success{
+  max-width:1150px; margin:0 auto; padding:.75rem 1rem;
+  border:1px solid color-mix(in oklab, var(--success) 40%, var(--border));
+  background:var(--success-bg); border-radius:10px; color:var(--fg);
+}

@@ -11,7 +11,7 @@ session_set_cookie_params([
 session_start();
 
 if (!empty($_SESSION['user_id'])) {
-    header('Location: messages.php');
+    header('Location: admin_menu.php');
     exit;
 }
 
@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 session_regenerate_id(true);
                 $_SESSION['user_id']  = $row['id'];
                 $_SESSION['username'] = $username;
-                header('Location: messages.php');
+                header('Location: admin_menu.php');
                 exit;
             } else {
                 $errors[] = 'Invalid username or password.';

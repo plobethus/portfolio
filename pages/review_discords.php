@@ -51,6 +51,7 @@ $rows = $q->fetchAll();
 </head>
 <body>
   <h1>Review Discord Submissions</h1>
+  <a href="/pages/logout.php">Logout</a>
   <table>
     <thead>
       <tr>

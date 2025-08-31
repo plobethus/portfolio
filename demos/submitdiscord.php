@@ -1,5 +1,7 @@
 <?php
 // demos/submitdiscord.php
+declare(strict_types=1);
+
 session_set_cookie_params(['secure'=>true,'httponly'=>true,'samesite'=>'Strict']);
 session_start();
 if (empty($_SESSION['csrf_token'])) { $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); }
@@ -11,21 +13,57 @@ $db_user = getenv('DB_USER') ?: 'contact_user';
 $db_pass = getenv('DB_PASS') ?: '';
 $dsn     = "mysql:host={$db_host};dbname={$db_name};charset=utf8mb4";
 
+$YOUTUBE_INVITE_HELP_URL = "https://www.youtube.com/watch?v=00IKj-j8aSE";
+
+function normalize_discord_invite(string $url): string {
+  $url = trim($url);
+  if ($url === '') return '';
+
+  if (!preg_match('~^https?://~i', $url)) {
+    $url = 'https://' . $url; // allow users to omit scheme
+  }
+  $parts = parse_url($url);
+  if (!$parts || empty($parts['host']) || empty($parts['path'])) return '';
+
+  $host = strtolower($parts['host']);
+  $path = trim($parts['path'], '/');
+
+  // Accept discord.gg/<code> OR discord.com/invite/<code>
+  if ($host === 'discord.gg') {
+    $segments = explode('/', $path);
+    $code = $segments[0] ?? '';
+  } elseif ($host === 'discord.com' && str_starts_with($path, 'invite/')) {
+    $code = substr($path, strlen('invite/'));
+  } else {
+    return '';
+  }
+
+  // Vanity codes are alnum or dash; keep length generous but sane
+  if (!preg_match('/^[A-Za-z0-9-]{2,64}$/', $code)) return '';
+
+  // Canonicalize
+  return "https://discord.gg/" . $code;
+}
+
 $errors = []; $ok = false;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  if (empty($_POST['csrf_token']) || !hash_equals($csrf, $_POST['csrf_token'])) {
+  if (empty($_POST['csrf_token']) || !hash_equals($csrf, (string)$_POST['csrf_token'])) {
     $errors[] = 'Invalid request. Please refresh and try again.';
   } else {
     $course_id = (int)($_POST['course_id'] ?? 0);
-    $prof      = trim($_POST['professor_name'] ?? '');
-    $invite    = trim($_POST['invite_url'] ?? '');
 
-    if ($course_id <= 0) $errors[] = 'Please pick a course.';
-    if ($prof === '' || mb_strlen($prof) > 255) $errors[] = 'Professor name required (max 255 chars).';
+    // Professor: trim + collapse whitespace + allow letters, spaces, . - '
+    $prof = preg_replace('/\s+/u', ' ', trim((string)($_POST['professor_name'] ?? '')));
+    if ($prof === '' || mb_strlen($prof) > 100 || !preg_match("/^[\p{L} .'-]+$/u", $prof)) {
+      $errors[] = 'Professor name required (letters, spaces, . - \' only, max 100 chars).';
+    }
 
-    $re = '/^(https?:\/\/)?(discord\.gg|discord\.com\/invite)\/[A-Za-z0-9-]+\/?$/i';
-    if ($invite === '' || !preg_match($re, $invite)) $errors[] = 'Provide a valid Discord invite link.';
+    // Invite: normalize to canonical https://discord.gg/<code>
+    $invite = normalize_discord_invite((string)($_POST['invite_url'] ?? ''));
+    if ($invite === '') {
+      $errors[] = 'Provide a valid Discord invite link (discord.gg or discord.com/invite).';
+    }
 
     if (!$errors) {
       try {
@@ -35,10 +73,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           PDO::ATTR_EMULATE_PREPARES=>false
         ]);
 
-        $exists = $pdo->prepare("SELECT 1 FROM courses WHERE course_id=?");
-        $exists->execute([$course_id]);
-        if (!$exists->fetch()) $errors[] = 'Unknown course.';
-        else {
+        // Rate limit: max 5 submissions per hour per IP
+        $ip = $_SERVER['REMOTE_ADDR'] ?? '';
+        $cnt = $pdo->prepare("
+          SELECT COUNT(*) FROM discord_servers
+          WHERE submitter_ip = INET6_ATON(:ip)
+            AND submitted_at >= NOW() - INTERVAL 1 HOUR
+        ");
+        $cnt->execute([':ip' => $ip]);
+        if ((int)$cnt->fetchColumn() > 5) {
+          $errors[] = 'Too many submissions from your IP. Try again later.';
+        }
+
+        // Ensure course exists
+        if (!$errors) {
+          $exists = $pdo->prepare("SELECT 1 FROM courses WHERE course_id = ?");
+          $exists->execute([$course_id]);
+          if (!$exists->fetch()) {
+            $errors[] = 'Unknown course.';
+          }
+        }
+
+        // Reject duplicates (same course/prof/invite)
+        if (!$errors) {
+          $dupe = $pdo->prepare("
+            SELECT 1 FROM discord_servers
+            WHERE course_id = :cid AND professor_name = :prof AND invite_url = :invite
+            LIMIT 1
+          ");
+          $dupe->execute([':cid'=>$course_id, ':prof'=>$prof, ':invite'=>$invite]);
+          if ($dupe->fetch()) {
+            $errors[] = 'This link is already submitted (pending or approved).';
+          }
+        }
+
+        // Insert suspended by default
+        if (!$errors) {
           $ins = $pdo->prepare("
             INSERT INTO discord_servers
               (course_id, professor_name, invite_url, status, submitter_ip, user_agent)
@@ -49,19 +119,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':cid'   => $course_id,
             ':prof'  => $prof,
             ':invite'=> $invite,
-            ':ip'    => $_SERVER['REMOTE_ADDR'] ?? '',
+            ':ip'    => $ip,
             ':ua'    => substr($_SERVER['HTTP_USER_AGENT'] ?? '', 0, 255),
           ]);
           $ok = true;
         }
       } catch (Throwable $e) {
+        // Optional: error_log($e->getMessage());
         $errors[] = 'Server error. Try again later.';
       }
     }
   }
 }
 
-
+// Load courses for dropdown
 try {
   $pdo2 = new PDO($dsn, $db_user, $db_pass, [
     PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,
@@ -70,8 +141,6 @@ try {
   ]);
   $courses = $pdo2->query("SELECT course_id, course_name FROM courses ORDER BY course_id")->fetchAll();
 } catch (Throwable $e) { $courses = []; }
-
-$YOUTUBE_INVITE_HELP_URL = "https://www.youtube.com/watch?v=00IKj-j8aSE"; 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -95,28 +164,28 @@ $YOUTUBE_INVITE_HELP_URL = "https://www.youtube.com/watch?v=00IKj-j8aSE";
     <p class="success">Thanks! Your link was submitted for review. It will appear after approval.</p>
   <?php endif; ?>
   <?php if ($errors): ?>
-    <div class="error"><ul><?php foreach ($errors as $e) echo '<li>'.htmlspecialchars($e,ENT_QUOTES).'</li>'; ?></ul></div>
+    <div class="error"><ul><?php foreach ($errors as $e) echo '<li>'.htmlspecialchars($e, ENT_QUOTES, 'UTF-8').'</li>'; ?></ul></div>
   <?php endif; ?>
 
   <form method="POST" action="">
-    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf, ENT_QUOTES) ?>">
+    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf, ENT_QUOTES, 'UTF-8') ?>">
     <label for="course">Course</label>
     <select id="course" name="course_id" required>
       <option value="">-- Select course --</option>
       <?php foreach ($courses as $c): ?>
         <option value="<?= (int)$c['course_id'] ?>">
-          <?= (int)$c['course_id'] ?> — <?= htmlspecialchars($c['course_name'], ENT_QUOTES) ?>
+          <?= (int)$c['course_id'] ?> — <?= htmlspecialchars($c['course_name'], ENT_QUOTES, 'UTF-8') ?>
         </option>
       <?php endforeach; ?>
     </select>
 
     <label for="prof">Professor name</label>
-    <input id="prof" name="professor_name" required maxlength="255" placeholder="e.g., Eick">
+    <input id="prof" name="professor_name" required maxlength="100" placeholder="e.g., Eick" autocomplete="name" />
 
     <label for="invite">Discord invite link</label>
-    <input id="invite" name="invite_url" required maxlength="255" placeholder="https://discord.gg/yourcode">
+    <input id="invite" name="invite_url" required maxlength="255" placeholder="https://discord.gg/yourcode" inputmode="url" autocomplete="url" />
     <p class="notice">Please put a <strong>PERMANENT, NON-EXPIRING</strong> invite link.
-      <a href="<?= htmlspecialchars($YOUTUBE_INVITE_HELP_URL, ENT_QUOTES) ?>" target="_blank" rel="noopener">How to create one (video)</a>.
+      <a href="<?= htmlspecialchars($YOUTUBE_INVITE_HELP_URL, ENT_QUOTES, 'UTF-8') ?>" target="_blank" rel="noopener noreferrer">How to create one (video)</a>.
     </p>
 
     <button type="submit" style="margin-top:1rem;">Submit</button>

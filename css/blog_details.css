@@ -1,142 +1,84 @@
 /* ─────────────────────────────────────────────
-   portfolio/css/blog_details.css
+   portfolio/css/blog_details.css (themed to global/project)
    ───────────────────────────────────────────── */
 
 .blog-detail-container {
-    margin-top: 2.5rem;
-    margin-bottom: 2.5rem;
-    padding: 2rem;
-    background: #fff;
-    border-radius: .75rem;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, .08);
-    position: relative;
-    z-index: 1;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding: 2.5rem 2rem;
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: .75rem;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, .18);
+  color: var(--color-card-text);
+  position: relative;
 }
 
+/* Accent bar */
 .blog-detail-container::before {
-    content: "";
-    display: block;
-    height: 4px;
-    width: 60px;
-    border-radius: 4px;
-    background: var(--color-accent);
-    margin-bottom: 1.25rem;
+  content: "";
+  display: block;
+  height: 4px;
+  width: 60px;
+  border-radius: 4px;
+  background: var(--color-accent);
+  margin-bottom: 1.25rem;
 }
 
-h1 {
-    font-size: 2.25rem;
-    margin-bottom: .5rem;
-    color: #222;
-    font-weight: 700;
+/* Headings */
+.blog-detail-container h1 {
+  font-size: 2.25rem;
+  margin-bottom: .75rem;
+  font-weight: 700;
+  color: var(--color-text);
 }
 
-.post-meta {
-    font-size: .95rem;
-    color: #777;
-    margin-bottom: 2rem;
-    display: flex;
-    gap: .5rem;
+.blog-detail-container .post-meta {
+  font-size: .95rem;
+  color: rgba(240,240,240,.75);
+  margin-bottom: 2rem;
+  display: flex;
+  gap: .75rem;
+  flex-wrap: wrap;
 }
 
-.post-meta span {
-    font-style: italic;
+.blog-detail-container .post-meta span { font-style: italic; }
+
+.blog-detail-container h2 {
+  font-size: 1.6rem;
+  margin: 2.25rem 0 1rem;
+  font-weight: 700;
+  color: var(--color-accent);
 }
 
-h2 {
-    font-size: 1.6rem;
-    margin: 2.5rem 0 1rem;
-    color: var(--color-accent);
-    font-weight: 700;
+/* Text */
+.blog-detail-container p {
+  margin-bottom: 1.1rem;
+  font-size: 1rem;
+  color: var(--color-card-text);
+  line-height: 1.7;
 }
 
-p {
-    margin-bottom: 1.25rem;
-    font-size: 1rem;
-    color: #555;
-    line-height: 1.6;
+/* Links (scoped) */
+.blog-detail-container a {
+  color: var(--color-accent);
+  text-underline-offset: 3px;
+  transition: color .15s ease;
+}
+.blog-detail-container a:hover,
+.blog-detail-container a:focus-visible {
+  color: #90D4FF; /* slightly darker accent to match global */
 }
 
-code {
-    font-family: Consolas, Monaco, 'Courier New', monospace;
-    background: #f0f0f0;
-    padding: .15rem .3rem;
-    border-radius: 3px;
-    font-size: .95rem;
+/* Inline code */
+.blog-detail-container code {
+  font-family: Consolas, Monaco, 'Courier New', monospace;
+  background: rgba(255,255,255,.07);
+  border: 1px solid var(--color-border);
+  padding: .15rem .35rem;
+  border-radius: 4px;
+  font-size: .95rem;
+  color: var(--color-text);
 }
 
-pre[class*="language-"] {
-    overflow-x: auto;
-    white-space: pre;
-    margin: 1.75rem 0;
-    padding: 1.25rem 1.5rem;
-    background: #272822;
-    color: #f8f8f2;
-    border-radius: .5rem;
-    font-size: .92rem;
-    line-height: 1.55;
-    box-shadow: inset 0 0 8px rgba(0, 0, 0, .35);
-}
-
-blockquote {
-    margin: 2rem 1.5rem;
-    padding: 1rem 1.5rem;
-    background: #f0f0f0;
-    border-left: 5px solid var(--color-accent);
-    color: #555;
-    font-style: italic;
-}
-
-img.post-image {
-    max-width: 100%;
-    display: block;
-    margin: 1.5rem auto;
-    border-radius: .5rem;
-}
-
-figcaption {
-    text-align: center;
-    font-size: .9rem;
-    color: #777;
-    margin-top: .5rem;
-}
-
-a {
-    color: var(--color-accent);
-    text-underline-offset: 2px;
-}
-
-a:hover,
-a:focus-visible {
-    color: #028c57;
-}
-
-.back-link {
-    display: inline-block;
-    margin-top: 3rem;
-    font-weight: 600;
-    font-size: .95rem;
-}
-
-@media (max-width: 640px) {
-    .blog-detail-container {
-        padding: 1.5rem 1rem;
-    }
-
-    h1 {
-        font-size: 1.75rem;
-    }
-
-    h2 {
-        font-size: 1.35rem;
-    }
-
-    p,
-    code {
-        font-size: .9rem;
-    }
-
-    pre[class*="language-"] {
-        font-size: .8rem;
-        padding: 1rem 1.25rem;
-    }
-}
+/* Code bl*

@@ -1,0 +1,281 @@
+<!-- portfolio/pages/uhdlapi.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UHDL API — UH CS Discord Links</title>
+  <meta name="description" content="HTTP JSON API for UH Computer Science Discord links" />
+  <link rel="stylesheet" href="/css/global.css" />
+  <link rel="stylesheet" href="/css/project-details.css" />
+  <link rel="stylesheet" href="/css/prism.css" />
+  <script src="/js/includeHead.js" defer></script>
+</head>
+
+<body>
+  <div id="navbar"></div>
+  <script src="/js/prism.js"></script>
+
+  <main class="project-detail-container">
+    <h1>UHDL API (UH Discord Links)</h1>
+    <p class="project-intro">
+      A tiny, production-ready JSON API that serves approved Discord invite links for UH Computer Science courses.
+      It powers the public directory on <a href="https://www.nelsonarcher.com/demos/uhcs-disc" target="_blank" rel="noopener noreferrer">nelsonarcher.com</a>.
+    </p>
+
+    <section class="project-section">
+      <h2>Overview</h2>
+      <ul>
+        <li><strong>Base URL:</strong> <code>https://www.henrymoran.net/api</code></li>
+        <li><strong>Main endpoint:</strong> <code>/servers.php</code> (GET)</li>
+        <li><strong>Format:</strong> JSON, UTF-8</li>
+        <li><strong>Source of truth:</strong> MariaDB (<code>courses</code>, <code>discord_servers</code>)</li>
+        <li><strong>Inclusion rule:</strong> Only <em>approved</em> submissions appear</li>
+        <li><strong>CORS:</strong> Allowed origin <code>https://www.nelsonarcher.com</code> (frontend)</li>
+        <li><strong>Caching:</strong> <code>Cache-Control: public, max-age=60</code>; ETag via server</li>
+      </ul>
+    </section>
+
+    <section class="project-section">
+      <h2>Endpoint</h2>
+
+      <h3>GET <code>/api/servers.php</code></h3>
+      <p>Returns all COSC courses and (if approved) professors with non-expiring Discord invites.</p>
+
+      <h4>Query params (optional)</h4>
+      <ul>
+        <li><code>?pretty=1</code> — return human-readable JSON (for debugging)</li>
+      </ul>
+
+      <h4>Response shape</h4>
+      <pre class="line-numbers"><code class="language-json">[
+  {
+    "courseId": 2436,
+    "courseName": "Programming and Data Structures",
+    "professors": [
+      { "name": "Rizk",   "link": "https://discord.gg/QzjSz3nVgY" },
+      { "name": "Unknown","link": "https://discord.gg/aAZZwjJ3yR" }
+    ]
+  },
+  {
+    "courseId": 2425,
+    "courseName": "Computer Organization and Architecture",
+    "professors": [
+      { "name": "Mantini",  "link": "https://discord.gg/qBMrAhjHYz" },
+      { "name": "Long",     "link": "https://discord.gg/qBMrAhjHYz" },
+      { "name": "Johnsson", "link": "https://discord.gg/qBMrAhjHYz" }
+    ]
+  }
+]</code></pre>
+
+      <h4>Status codes</h4>
+      <ul>
+        <li><code>200</code> — OK</li>
+        <li><code>500</code> — Server/DB error: <code>{"error":"db_error"}</code></li>
+      </ul>
+    </section>
+
+    <section class="project-section">
+      <h2>Quickstart</h2>
+
+      <h3>cURL</h3>
+      <pre class="line-numbers"><code class="language-bash"># Basic GET
+curl -i https://www.henrymoran.net/api/servers.php
+
+# Pretty output for humans
+curl -s https://www.henrymoran.net/api/servers.php?pretty=1 | jq .
+
+# Check CORS as seen by the nelsonarcher.com frontend
+curl -i \
+  -H "Origin: https://www.nelsonarcher.com" \
+  https://www.henrymoran.net/api/servers.php
+
+# Simulate a preflight request (OPTIONS)
+curl -i -X OPTIONS \
+  -H "Origin: https://www.nelsonarcher.com" \
+  -H "Access-Control-Request-Method: GET" \
+  https://www.henrymoran.net/api/servers.php</code></pre>
+
+      <h3>Fetch (browser / React)</h3>
+      <p>The frontend first tries the remote API; if it fails or times out, it falls back to a bundled <code>public/servers.json</code>.</p>
+      <pre class="line-numbers"><code class="language-javascript">// Remote first, fallback to local (simplified)
+const REMOTE = 'https://www.henrymoran.net/api/servers.php';
+const LOCAL  = '/servers.json';
+
+async function getServers() {
+  const ac = new AbortController();
+  const timer = setTimeout(() => ac.abort(), 4000);
+  try {
+    const r = await fetch(REMOTE, { signal: ac.signal, headers: { Accept: 'application/json' } });
+    if (!r.ok) throw new Error(r.status);
+    return await r.json();
+  } catch {
+    const r2 = await fetch(LOCAL, { headers: { Accept: 'application/json' }});
+    return await r2.json();
+  } finally {
+    clearTimeout(timer);
+  }
+}</code></pre>
+    </section>
+
+    <!-- NEW SECTION -->
+    <section class="project-section">
+      <h2>Build your own client</h2>
+      <p>
+        Want to build your own site or tool that lists these Discord servers? Here are three easy approaches.
+        <strong>Note:</strong> the API currently allows browser requests from <code>https://www.nelsonarcher.com</code>.
+        If your site is on a different domain, use the <em>server-side proxy</em> option below or contact me to whitelist your origin.
+      </p>
+
+      <h3>1) Plain HTML page (if your origin is whitelisted)</h3>
+      <pre class="line-numbers"><code class="language-html">&lt;!doctype html&gt;
+&lt;html&gt;
+&lt;body&gt;
+  &lt;ul id="list"&gt;&lt;/ul&gt;
+  &lt;script&gt;
+    fetch('https://www.henrymoran.net/api/servers.php')
+      .then(r =&gt; r.json())
+      .then(data =&gt; {
+        const ul = document.getElementById('list');
+        data.forEach(c =&gt; {
+          const li = document.createElement('li');
+          li.textContent = `COSC ${c.courseId} — ${c.courseName} (${c.professors.length} links)`;
+          ul.appendChild(li);
+        });
+      })
+      .catch(err =&gt; console.error('API error', err));
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+      <h3>2) React (with remote + local fallback)</h3>
+      <pre class="line-numbers"><code class="language-javascript">import { useEffect, useState } from 'react';
+
+const REMOTE = 'https://www.henrymoran.net/api/servers.php';
+const LOCAL  = '/servers.json';
+
+export default function Courses() {
+  const [courses, setCourses] = useState([]);
+
+  useEffect(() => {
+    let canceled = false;
+    const ac = new AbortController();
+    const t = setTimeout(() => ac.abort(), 4000);
+
+    (async () => {
+      try {
+        const r = await fetch(REMOTE, { signal: ac.signal, headers: { Accept: 'application/json' } });
+        if (!r.ok) throw new Error(r.status);
+        const json = await r.json();
+        if (!canceled) setCourses(json);
+      } catch {
+        const r2 = await fetch(LOCAL, { headers: { Accept: 'application/json' }});
+        const json2 = await r2.json();
+        if (!canceled) setCourses(json2);
+      } finally {
+        clearTimeout(t);
+      }
+    })();
+
+    return () => { canceled = true; ac.abort(); };
+  }, []);
+
+  return (
+    &lt;ul&gt;
+      {courses.map(c =&gt; (
+        &lt;li key={c.courseId}&gt;COSC {c.courseId} — {c.courseName}&lt;/li&gt;
+      ))}
+    &lt;/ul&gt;
+  );
+}</code></pre>
+
+      <h3>3) Server-side proxy (avoids CORS from any domain)</h3>
+      <p>
+        Put a tiny proxy in front of the API. Your browser hits your domain; your server fetches the UHDL API and returns JSON.
+        Add caching headers for efficiency.
+      </p>
+
+      <h4>Node/Express</h4>
+      <pre class="line-numbers"><code class="language-javascript">import express from 'express';
+import fetch from 'node-fetch';
+const app = express();
+
+app.get('/uhdl/servers', async (req, res) => {
+  try {
+    const r = await fetch('https://www.henrymoran.net/api/servers.php', {
+      headers: { 'Accept': 'application/json' }
+    });
+    res.set('Cache-Control', 'public, max-age=60, stale-while-revalidate=300');
+    res.type('application/json');
+    res.status(r.status).send(await r.text());
+  } catch (e) {
+    res.status(502).json({ error: 'bad_gateway', message: 'Upstream UHDL API unreachable' });
+  }
+});
+
+app.listen(3000, () => console.log('Proxy on http://localhost:3000'));</code></pre>
+
+      <h4>Cloudflare Worker (edge proxy)</h4>
+      <pre class="line-numbers"><code class="language-javascript">export default {
+  async fetch(request) {
+    const upstream = 'https://www.henrymoran.net/api/servers.php';
+    try {
+      const r = await fetch(upstream, { headers: { 'Accept': 'application/json' }});
+      const init = {
+        status: r.status,
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8',
+          'Cache-Control': 'public, max-age=60, stale-while-revalidate=300'
+        }
+      };
+      return new Response(await r.text(), init);
+    } catch (e) {
+      return new Response(JSON.stringify({ error: 'bad_gateway'}), {
+        status: 502,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+  }
+};</code></pre>
+
+      <h4>Notes</h4>
+      <ul>
+        <li>Proxies are the simplest way to consume the API from any site without changing CORS.</li>
+        <li>If you want direct browser access from your domain, ask to whitelist your origin (CORS).</li>
+        <li>Respect caching: the API sets <code>max-age=60</code>; your proxy can mirror or extend it.</li>
+      </ul>
+    </section>
+    <!-- /NEW SECTION -->
+
+    <section class="project-section">
+      <h2>Submitting & Moderation</h2>
+      <ul>
+        <li><strong>Public submit:</strong> <a href="/demos/submitdiscord.php">/demos/submitdiscord.php</a> — submissions start <em>suspended</em>.</li>
+        <li><strong>Admin review:</strong> <a href="/pages/review_discords.php">/pages/review_discords.php</a> — approve/suspend toggles.</li>
+        <li><strong>Inclusion:</strong> Only entries with status <code>approved</code> are emitted by the API.</li>
+      </ul>
+    </section>
+
+    <section class="project-section">
+      <h2>Implementation Notes</h2>
+      <ul>
+        <li><strong>Stack:</strong> Apache on RHEL, PHP 8, MariaDB, Cloudflare.</li>
+        <li><strong>CORS:</strong> <code>Access-Control-Allow-Origin: https://www.nelsonarcher.com</code> (adjustable per vhost).</li>
+        <li><strong>Security:</strong> Parameterized SQL; CSRF on admin actions; origin-locked CORS.</li>
+        <li><strong>Performance:</strong> Modest <code>max-age</code> and Cloudflare caching; JSON is lightweight.</li>
+      </ul>
+    </section>
+
+    <section class="project-section">
+      <h2>Changelog</h2>
+      <ul>
+        <li><strong>2025-08-30:</strong> API launched at <code>/api/servers.php</code>. DB-backed, approved-only.</li>
+      </ul>
+    </section>
+
+    <a class="back-link" href="../projects.html">← Back to Projects</a>
+  </main>
+
+  <script src="/js/navbar.js" defer></script>
+</body>
+</html>

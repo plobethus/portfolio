@@ -1,7 +1,6 @@
 <!-- portfolio/pages/projects/cuda-solver.html -->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,8 +9,6 @@
     <link rel="stylesheet" href="/css/global.css" />
     <link rel="stylesheet" href="/css/project-details.css" />
     <link rel="stylesheet" href="/css/prism.css" />
-
-
     <script src="/js/includeHead.js" defer></script>
 </head>
 
@@ -33,10 +30,16 @@
             <p>
                 This project was built entirely from scratch using standard web technologies — HTML, CSS, JavaScript,
                 and PHP — without any frontend frameworks.
-                It’s hosted on an Apache server and backed by a MariaDB database for secure message storage via the
-                contact form.
+                It’s hosted on an <strong>Apache</strong> server running <strong>RHEL</strong> <!-- updated -->
+                and backed by a MariaDB database for secure message storage via the contact form.
                 I also implemented Cloudflare to provide HTTPS, CDN caching, and basic DDoS protection.
-                Another thing I included is prism.js for syntax hilighting in my project pages. 
+                Another thing I included is prism.js for syntax highlighting in my project pages.
+            </p>
+            <p>
+                <!-- updated -->
+                Beyond the portfolio, this server also powers the
+                <a href="/pages/uhdlapi.html">UHDL Discord List API</a>, a JSON API that serves approved,
+                non-expiring Discord invites for UH Computer Science courses.
             </p>
             <p>
                 My goal was to create a fast, accessible, and responsive site that I fully control — every part of the
@@ -63,7 +66,7 @@
   &lt;input id="name" name="name" required /&gt;
   ...
 &lt;/form&gt;
-    </code></pre>
+            </code></pre>
             <p>
                 This form securely submits user messages to a backend PHP script with CSRF protection and server-side
                 validation. Messages are stored in MariaDB.
@@ -72,13 +75,14 @@
 
         <!-- ── Stack & Security ────────────────── -->
         <section class="project-section">
-            <h2>Stack & Security Features</h2>
+            <h2>Stack &amp; Security Features</h2>
             <ul>
                 <li><strong>Frontend:</strong> HTML5, CSS (no frameworks), vanilla JavaScript</li>
                 <li><strong>Backend:</strong> PHP 8 with best-practice session/cookie security</li>
                 <li><strong>Database:</strong> MariaDB for storing contact messages</li>
-                <li><strong>Web server:</strong> Apache with HTTPS via Cloudflare</li>
+                <li><strong>Web server:</strong> Apache on <strong>RHEL</strong> with HTTPS via Cloudflare <!-- updated --></li>
                 <li><strong>Security:</strong> CSRF tokens, input sanitization, secure session management</li>
+                <li><!-- updated --><strong>Services:</strong> <a href="/pages/projects/uhdlapi.html">UHDL Discord List API</a> (DB-backed JSON at <code>/api/servers.php</code>)</li>
             </ul>
         </section>
 
@@ -98,5 +102,4 @@
 
     <script src="/js/navbar.js" defer></script>
 </body>
-
 </html>

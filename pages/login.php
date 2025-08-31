@@ -1,5 +1,8 @@
 <?php
 // portfolio/pages/login.php
+declare(strict_types=1);
+
+ini_set('session.use_strict_mode', '1');
 session_set_cookie_params([
     'lifetime' => 0,
     'path'     => '/',
@@ -10,23 +13,32 @@ session_set_cookie_params([
 ]);
 session_start();
 
+// Don’t cache login pages
+header('Cache-Control: no-store');
+
 if (!empty($_SESSION['user_id'])) {
     header('Location: admin_menu.php');
     exit;
 }
 
 $errors = [];
+// Simple in-session throttle
+$_SESSION['login_attempts'] = $_SESSION['login_attempts'] ?? 0;
+$_SESSION['login_last']     = $_SESSION['login_last'] ?? 0;
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (
-        empty($_POST['csrf_token']) ||
-        !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])
-    ) {
+// Small lockout after too many attempts
+$now = time();
+if ($_SESSION['login_attempts'] >= 8 && ($now - (int)$_SESSION['login_last']) < 600) {
+    $errors[] = 'Too many login attempts. Please wait a few minutes and try again.';
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($errors)) {
+    if (empty($_POST['csrf_token']) || !hash_equals($_SESSION['csrf_token'] ?? '', (string)$_POST['csrf_token'])) {
         $errors[] = 'Invalid CSRF token.';
     }
 
-    $username = trim($_POST['username'] ?? '');
-    $password = $_POST['password'] ?? '';
+    $username = trim((string)($_POST['username'] ?? ''));
+    $password = (string)($_POST['password'] ?? '');
 
     if ($username === '' || $password === '') {
         $errors[] = 'Both username and password are required.';
@@ -50,22 +62,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         if (empty($errors)) {
-            $stmt = $pdo->prepare("
-                SELECT id, password
-                  FROM users
-                 WHERE username = :username
-                 LIMIT 1
-            ");
+            $stmt = $pdo->prepare("SELECT id, password FROM users WHERE username = :username LIMIT 1");
             $stmt->execute([':username' => $username]);
             $row = $stmt->fetch();
 
+            // Always add a tiny random delay to make brute force less efficient
+            usleep(random_int(200000, 450000));
+
             if ($row && password_verify($password, $row['password'])) {
                 session_regenerate_id(true);
-                $_SESSION['user_id']  = $row['id'];
+                $_SESSION['user_id']  = (int)$row['id'];
                 $_SESSION['username'] = $username;
+                // reset throttle
+                $_SESSION['login_attempts'] = 0;
+                $_SESSION['login_last'] = $now;
                 header('Location: admin_menu.php');
                 exit;
             } else {
+                $_SESSION['login_attempts']++;
+                $_SESSION['login_last'] = $now;
                 $errors[] = 'Invalid username or password.';
             }
         }
@@ -84,7 +99,6 @@ $csrf_token = $_SESSION['csrf_token'];
   <title>Admin Login</title>
   <link rel="stylesheet" href="/css/global.css" />
   <link rel="stylesheet" href="/css/login.css" />
-
 </head>
 <body>
   <h1>Admin Login</h1>
@@ -101,13 +115,12 @@ $csrf_token = $_SESSION['csrf_token'];
     <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token, ENT_QUOTES, 'UTF-8') ?>">
 
     <label for="username">Username</label>
-    <input type="text" id="username" name="username" required autofocus>
+    <input type="text" id="username" name="username" required autofocus autocomplete="username">
 
     <label for="password">Password</label>
-    <input type="password" id="password" name="password" required>
+    <input type="password" id="password" name="password" required autocomplete="current-password">
 
     <button type="submit">Log In</button>
   </form>
 </body>
 </html>
-

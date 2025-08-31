@@ -2,10 +2,12 @@
 // pages/review_discords.php
 session_set_cookie_params(['secure'=>true,'httponly'=>true,'samesite'=>'Strict']);
 session_start();
-if (empty($_SESSION['user_id'])) {
+$role = $_SESSION['role'] ?? '';
+if (empty($_SESSION['user_id']) || !in_array($role, ['admin','moderator'], true)) {
   header('Location: /pages/login.php');
   exit;
 }
+
 if (empty($_SESSION['csrf_token'])) { $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); }
 $csrf = $_SESSION['csrf_token'];
 

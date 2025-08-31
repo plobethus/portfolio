@@ -2,10 +2,12 @@
 // php/toggle_discord.php
 session_set_cookie_params(['secure'=>true,'httponly'=>true,'samesite'=>'Strict']);
 session_start();
-if (empty($_SESSION['user_id'])) {
+$role = $_SESSION['role'] ?? '';
+if (empty($_SESSION['user_id']) || !in_array($role, ['admin','moderator'], true)) {
   header('Location: /pages/login.php');
   exit;
 }
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' ||
     empty($_POST['csrf_token']) ||
     !hash_equals($_SESSION['csrf_token'] ?? '', $_POST['csrf_token'])) {

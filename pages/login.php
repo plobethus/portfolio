@@ -16,9 +16,16 @@ session_start();
 // Don’t cache login pages
 header('Cache-Control: no-store');
 
+// If already logged in, route by role
 if (!empty($_SESSION['user_id'])) {
-    header('Location: admin_menu.php');
-    exit;
+    $role = $_SESSION['role'] ?? 'viewer';
+    if ($role === 'admin') {
+        header('Location: admin_menu.php'); exit;
+    } elseif ($role === 'moderator') {
+        header('Location: /pages/review_discords.php'); exit;
+    } else {
+        header('Location: /'); exit;
+    }
 }
 
 $errors = [];
@@ -26,7 +33,6 @@ $errors = [];
 $_SESSION['login_attempts'] = $_SESSION['login_attempts'] ?? 0;
 $_SESSION['login_last']     = $_SESSION['login_last'] ?? 0;
 
-// Small lockout after too many attempts
 $now = time();
 if ($_SESSION['login_attempts'] >= 8 && ($now - (int)$_SESSION['login_last']) < 600) {
     $errors[] = 'Too many login attempts. Please wait a few minutes and try again.';
@@ -46,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($errors)) {
 
     if (empty($errors)) {
         $db_host = getenv('DB_HOST') ?: '127.0.0.1';
-        $db_name = getenv('DB_NAME') ?: 'contact_db';
+        $db_name = getenv('DB_NAME') ?: 'portfolio'; // default to portfolio
         $db_user = getenv('DB_USER') ?: 'contact_user';
         $db_pass = getenv('DB_PASS') ?: '';
         $dsn     = "mysql:host={$db_host};dbname={$db_name};charset=utf8mb4";
@@ -62,22 +68,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($errors)) {
         }
 
         if (empty($errors)) {
-            $stmt = $pdo->prepare("SELECT id, password FROM users WHERE username = :username LIMIT 1");
+            // Fetch role too
+            $stmt = $pdo->prepare("
+                SELECT id, password, role
+                  FROM users
+                 WHERE username = :username
+                 LIMIT 1
+            ");
             $stmt->execute([':username' => $username]);
             $row = $stmt->fetch();
 
-            // Always add a tiny random delay to make brute force less efficient
-            usleep(random_int(200000, 450000));
+            // tiny jitter to slow brute force a hair
+            usleep(random_int(200_000, 450_000));
 
             if ($row && password_verify($password, $row['password'])) {
+                // (Optional) auto-upgrade hash if algorithm/cost changed
+                if (password_needs_rehash($row['password'], PASSWORD_DEFAULT)) {
+                    $newHash = password_hash($password, PASSWORD_DEFAULT);
+                    if ($newHash !== false) {
+                        $u = $pdo->prepare("UPDATE users SET password = :p WHERE id = :id");
+                        $u->execute([':p' => $newHash, ':id' => (int)$row['id']]);
+                    }
+                }
+
                 session_regenerate_id(true);
                 $_SESSION['user_id']  = (int)$row['id'];
                 $_SESSION['username'] = $username;
+                $_SESSION['role']     = $row['role'] ?? 'viewer';
+
                 // reset throttle
                 $_SESSION['login_attempts'] = 0;
                 $_SESSION['login_last'] = $now;
-                header('Location: admin_menu.php');
-                exit;
+
+                // Redirect based on role
+                if ($_SESSION['role'] === 'admin') {
+                    header('Location: admin_menu.php'); exit;
+                } elseif ($_SESSION['role'] === 'moderator') {
+                    header('Location: /pages/review_discords.php'); exit;
+                } else {
+                    // Viewers: send somewhere safe (or show a message)
+                    header('Location: /'); exit;
+                }
             } else {
                 $_SESSION['login_attempts']++;
                 $_SESSION['login_last'] = $now;

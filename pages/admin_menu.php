@@ -1,10 +1,11 @@
 <?php
 session_set_cookie_params(['lifetime'=>0,'path'=>'/','secure'=>true,'httponly'=>true,'samesite'=>'Strict']);
 session_start();
-if (empty($_SESSION['user_id'])) {
+if (empty($_SESSION['user_id']) || ($_SESSION['role'] ?? '') !== 'admin') {
   header('Location: /pages/login.php');
   exit;
 }
+
 $username = htmlspecialchars($_SESSION['username'] ?? 'Admin', ENT_QUOTES, 'UTF-8');
 ?>
 <!DOCTYPE html>

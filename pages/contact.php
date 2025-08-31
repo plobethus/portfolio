@@ -29,13 +29,8 @@ $csrf_token = $_SESSION['csrf_token'];
   <link rel="stylesheet" href="/css/global.css" />
   <link rel="stylesheet" href="/css/contact.css" />
   <script src="/js/includeHead.js" defer></script>
-  <style>
-    .success { background:#e6ffed; padding:.75rem 1rem; border-radius:8px; }
-    .error { background:#ffecec; padding:.75rem 1rem; border-radius:8px; }
-  </style>
 </head>
 <body>
-
   <div id="navbar"></div>
 
   <main class="contact-container">
@@ -43,10 +38,10 @@ $csrf_token = $_SESSION['csrf_token'];
 
     <?php
     if (!empty($_GET['status']) && $_GET['status'] === 'success') {
-        echo '<p class="success">Thank you! Your message has been submitted.</p>';
+        echo '<div class="alert alert-success" role="status" aria-live="polite">Thank you! Your message has been submitted.</div>';
     } elseif (!empty($_GET['error'])) {
         $err = htmlspecialchars((string)$_GET['error'], ENT_QUOTES, 'UTF-8');
-        echo "<p class=\"error\">{$err}</p>";
+        echo '<div class="alert alert-error" role="status" aria-live="assertive">'.$err.'</div>';
     }
     ?>
 
@@ -54,8 +49,7 @@ $csrf_token = $_SESSION['csrf_token'];
       <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token, ENT_QUOTES, 'UTF-8') ?>" />
 
       <!-- Honeypot: submit_contact.php rejects if this is filled -->
-      <div style="position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden;"
-           aria-hidden="true">
+      <div style="position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden;" aria-hidden="true">
         <label for="company">Company</label>
         <input type="text" id="company" name="company" tabindex="-1" autocomplete="off">
       </div>

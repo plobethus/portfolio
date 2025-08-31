@@ -7,6 +7,8 @@ session_start();
 if (empty($_SESSION['csrf_token'])) { $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); }
 $csrf = $_SESSION['csrf_token'];
 
+header('Cache-Control: no-store');
+
 $db_host = getenv('DB_HOST') ?: '127.0.0.1';
 $db_name = getenv('DB_NAME') ?: 'portfolio';
 $db_user = getenv('DB_USER') ?: 'contact_user';
@@ -38,7 +40,7 @@ function normalize_discord_invite(string $url): string {
     return '';
   }
 
-  // Vanity codes are alnum or dash; keep length generous but sane
+  // Vanity codes are alnum or dash
   if (!preg_match('/^[A-Za-z0-9-]{2,64}$/', $code)) return '';
 
   // Canonicalize
@@ -125,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           $ok = true;
         }
       } catch (Throwable $e) {
-        // Optional: error_log($e->getMessage());
+        // error_log($e->getMessage());
         $errors[] = 'Server error. Try again later.';
       }
     }
@@ -152,19 +154,22 @@ try {
     .wrap { max-width: 720px; margin: 2rem auto; }
     label { display:block; margin-top:1rem; }
     input, select { width:100%; padding:.6rem; }
-    .notice { font-size:.95rem; color:#555; }
-    .success { background:#e6ffed; padding:.8rem; border-radius:8px; }
-    .error { background:#ffecec; padding:.8rem; border-radius:8px; }
   </style>
 </head>
 <body>
 <div class="wrap">
   <h1>Submit a Discord</h1>
+
   <?php if ($ok): ?>
-    <p class="success">Thanks! Your link was submitted for review. It will appear after approval.</p>
+    <div class="alert alert-success" role="status" aria-live="polite">
+      Thanks! Your link was submitted for review. It will appear after approval.
+    </div>
   <?php endif; ?>
+
   <?php if ($errors): ?>
-    <div class="error"><ul><?php foreach ($errors as $e) echo '<li>'.htmlspecialchars($e, ENT_QUOTES, 'UTF-8').'</li>'; ?></ul></div>
+    <div class="alert alert-error" role="status" aria-live="assertive">
+      <ul><?php foreach ($errors as $e) echo '<li>'.htmlspecialchars($e,ENT_QUOTES,'UTF-8').'</li>'; ?></ul>
+    </div>
   <?php endif; ?>
 
   <form method="POST" action="">
@@ -188,7 +193,7 @@ try {
       <a href="<?= htmlspecialchars($YOUTUBE_INVITE_HELP_URL, ENT_QUOTES, 'UTF-8') ?>" target="_blank" rel="noopener noreferrer">How to create one (video)</a>.
     </p>
 
-    <button type="submit" style="margin-top:1rem;">Submit</button>
+    <button type="submit" class="btn btn-primary" style="margin-top:1rem;">Submit</button>
   </form>
 
   <p style="margin-top:1.5rem;"><a href="/demos/UHDL.php">Back to menu</a></p>

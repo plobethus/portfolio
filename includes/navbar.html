@@ -1,8 +1,26 @@
 <!-- portfolio/includes/navbar.html -->
-<nav class="navbar">
-  <a href="/index.html">Home</a>
-  <a href="/pages/about.html">About</a>    
-  <a href="/pages/projects.html">Projects</a>
-  <a href="/pages/blog.html">Blog</a>
-  <a href="/pages/contact.php">Contact</a>
+<nav class="navbar" role="navigation" aria-label="Main">
+  <a class="navbar-brand" href="/index.html">Henry Moran</a>
+
+  <!-- Mobile toggle -->
+  <button
+    class="navbar-toggle"
+    type="button"
+    aria-expanded="false"
+    aria-controls="mainmenu"
+    aria-label="Open menu"
+  >
+    <span class="bar" aria-hidden="true"></span>
+    <span class="bar" aria-hidden="true"></span>
+    <span class="bar" aria-hidden="true"></span>
+  </button>
+
+  <!-- Menu -->
+  <div id="mainmenu" class="navbar-menu" hidden>
+    <a href="/index.html">Home</a>
+    <a href="/pages/about.html">About</a>
+    <a href="/pages/projects.html">Projects</a>
+    <a href="/pages/blog.html">Blog</a>
+    <a href="/pages/contact.php">Contact</a>
+  </div>
 </nav>

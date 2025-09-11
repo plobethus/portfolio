@@ -1,5 +1,4 @@
 <?php
-// portfolio/pages/contact.php
 declare(strict_types=1);
 
 session_set_cookie_params([

@@ -1,68 +1,81 @@
-<!-- portfolio/pages/about.html-->
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <title>About Me | Henry Moran</title>
+  <meta charset="utf-8">
+  <title>About Me | Henry Moran</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="stylesheet" href="/css/global.css">
-    <link rel="stylesheet" href="/css/about.css">
+  <link rel="stylesheet" href="/css/global.css">
+  <link rel="stylesheet" href="/css/about.css">
 
-    <script src="/js/includeHead.js" defer></script>
+  <script src="/js/includeHead.js" defer></script>
 </head>
-
 <body>
-    <header id="navbar"></header>
-    
+  <header id="navbar"></header>
 
-    <main class="container p-1">
-        <section class="card intro mb-1">
-            <div class="intro-grid">
-                <img id="profile-photo" src="/images/profile/profile1.jpg" alt="Photo of Henry Moran"
-                    class="profile-photo" width="180" height="180">
+  <main class="container p-1">
+    <section class="card intro mb-1">
+      <div class="intro-grid">
+        <img
+          id="profile-photo"
+          src="/images/profile/profile1.jpg"
+          alt="Photo of Henry Moran"
+          class="profile-photo"
+          width="180"
+          height="180"
+          loading="lazy"
+          decoding="async"
+        >
+        <p class="bio">
+          I'm Henry, a computer-science student at the University of Houston (class of&nbsp;2025).
+          I am currently a SWE intern at Global Dynamic Solutions LLC where I work on agentic AI.
+        </p>
+      </div>
+    </section>
 
-                <p class="bio">
-                    I'm Henry, a computer-science student at the University of Houston (class of&nbsp;2025).
-                    I am currently a SWE intern at Global Dynamic Sollutions LLC where I work on agentic ai. 
-            </div>
-        </section>
+    <section class="details-grid">
+      <article class="card">
+        <h2 class="text-center mb-1">Résumé</h2>
+        <iframe class="resume-scroll" src="/documents/resume.pdf" title="Résumé" loading="lazy"></iframe>
+      </article>
 
-        <section class="details-grid">
-            <article class="card">
-                <h2 class="text-center mb-1">Résumé</h2>
-                <iframe class="resume-scroll" src="/documents/resume.pdf" title="Résumé"></iframe>
-            </article>
+      <aside class="card">
+        <h2 class="text-center mb-1">GitHub Stats</h2>
+        <!-- fixed a stray quote that broke the URL; added lazy loading -->
+        <img
+          class="github-img mb-1"
+          src="https://github-readme-stats.vercel.app/api?username=plobethus&layout=compact&theme=transparent&show_icons=true&hide_border=true&count_private=true"
+          alt="GitHub stats"
+          loading="lazy"
+          decoding="async"
+        >
+        <img
+          class="github-img"
+          src="https://github-readme-stats.vercel.app/api/top-langs/?username=plobethus&layout=compact&theme=transparent&show_icons=true&hide_border=true"
+          alt="Top languages used"
+          loading="lazy"
+          decoding="async"
+        >
+      </aside>
+    </section>
 
-            <aside class="card">
-                <h2 class="text-center mb-1">GitHub Stats</h2>
-                <img class="github-img mb-1"
-                    src="https://github-readme-stats.vercel.app/api?username=plobethus&layout=compact&theme=transparent&show_icons=true&hide_border=true&count_private=true""    
-                    alt="Github Bragging">
-                <img class="github-img"
-                    src="https://github-readme-stats.vercel.app/api/top-langs/?username=plobethus&layout=compact&theme=transparent&show_icons=true&hide_border=true"
-                    alt="Top languages used">
-            </aside>
-        </section>
-        <section class="card text-center mt-1 p-1">
-            <h2>Connect with Me</h2>
-            <div class="social-links">
-                <a href="https://github.com/plobethus" target="_blank" rel="noopener noreferrer">
-                    <img src="/images/profile/github.svg" alt="GitHub" width="32" height="32">
-                </a>
-                <a href="https://linkedin.com/in/plobethus" target="_blank" rel="noopener noreferrer">
-                    <img src="/images/profile/linkedin.svg" alt="LinkedIn" width="32" height="32">
-                </a>
-                <a href="mailto:hmoran@email.com">
-                    <img src="/images/profile/mail.svg" alt="Email" width="32" height="32">
-                </a>
-            </div>
-        </section>
-    </main>
+    <section class="card text-center mt-1 p-1">
+      <h2>Connect with Me</h2>
+      <div class="social-links">
+        <a href="https://github.com/plobethus" target="_blank" rel="noopener noreferrer">
+          <img src="/images/profile/github.svg" alt="GitHub" width="32" height="32" loading="lazy" decoding="async">
+        </a>
+        <a href="https://linkedin.com/in/plobethus" target="_blank" rel="noopener noreferrer">
+          <img src="/images/profile/linkedin.svg" alt="LinkedIn" width="32" height="32" loading="lazy" decoding="async">
+        </a>
+        <a href="mailto:hmoran@email.com">
+          <img src="/images/profile/mail.svg" alt="Email" width="32" height="32" loading="lazy" decoding="async">
+        </a>
+      </div>
+    </section>
+  </main>
 
-    <script src="/js/profile.js" defer></script>
-    <script src="/js/navbar.js?v=99" defer></script>
+  <script src="/js/profile.js" defer></script>
+  <script src="/js/navbar.js?v=99" defer></script>
 </body>
-
 </html>

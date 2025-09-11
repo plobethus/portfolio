@@ -72,11 +72,6 @@
 }
 
 @media (max-width: 480px) {
-  .contact-container {
-    margin: 1rem 0;
-  }
-
-  .contact-form {
-    padding: 1rem;
-  }
+  .contact-container { margin: 1rem 0; }
+  .contact-form { padding: 1rem; }
 }

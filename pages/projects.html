@@ -1,92 +1,70 @@
-<!-- portfolio/pages/projects.html-->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects | Henry Moran</title>
-    <meta name="description" content="Henry Moran's Projects">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects | Henry Moran</title>
+  <meta name="description" content="Henry Moran's Projects">
 
-    <link rel="stylesheet" href="/css/global.css">
-    <link rel="stylesheet" href="/css/projects.css">
+  <link rel="stylesheet" href="/css/global.css">
+  <link rel="stylesheet" href="/css/projects.css">
 
-    <script src="/js/includeHead.js" defer></script>
+  <script src="/js/includeHead.js" defer></script>
 </head>
-
 <body>
-    <header id="navbar"></header>
+  <header id="navbar"></header>
 
-    <main class="projects-container">
-        <h1>My Projects</h1>
+  <main class="projects-container">
+    <h1>My Projects</h1>
 
-        <div class="projects-grid">
-            <!-- ── Project card template — duplicate as needed ───────── -->
-            <!--
-      <a href="/pages/projects/projectpage.html" class="card">
+    <div class="projects-grid">
+      <a href="/pages/projects/portfolio.html" class="card">
         <div class="grid">
-          <img
-            src="/images/project-images/project-thumbnail.png"
-            alt="Screenshot of Project Name"
-          />
+          <img src="/images/portfolio/website.png" alt="Portfolio Thumbnail" loading="lazy" decoding="async" />
         </div>
         <div class="card-content">
-          <h2 class="card-title">Project Name</h2>
+          <h2 class="card-title">This Website!!!</h2>
           <p class="card-description">
-            Short description of project goes here
+            A self hosted portfolio website built using HTML, CSS, javascript, php, and MariaDB
           </p>
         </div>
       </a>
-      -->
-            <a href="/pages/projects/portfolio.html" class="card">
-                <div class="grid">
-                    <img src="/images/portfolio/website.png" alt="Portfolio Thumbnail" />
-                </div>
-                <div class="card-content">
-                    <h2 class="card-title">This Website!!!</h2>
-                    <p class="card-description">
-                        A self hosted portfolio website built using HTML, CSS, javascript, php, and MariaDB
-                    </p>
-                </div>
-            </a>
-            <a href="/pages/projects/cuda-solver.html" class="card">
-                <div class="grid">
-                    <img src="/images/cuda-solver-images/publicdomaingraphicscard.jpg" alt="CUDA Solver thumbnail" />
-                </div>
-                <div class="card-content">
-                    <h2 class="card-title">Linearly Dense CUDA Solver</h2>
-                    <p class="card-description">
-                        A high-performance dense linear solver written in CUDA, built with classmates to accelerate GPU
-                        matrix computations.
-                    </p>
-                </div>
-            </a>
-            <a href="/pages/projects/greybird-chalk.html" class="card">
-                <div class="grid">
-                    <img src="/images/Greybird-chalk-images/greybird-chalk.png" alt="Greybird-chalk thumbnail" />
-                </div>
-                <div class="card-content">
-                    <h2 class="card-title">Greybird-Chalk</h2>
-                    <p class="card-description">
-                        A recoloring of Greybird-dark to match a visual studio code and terminal theme
-                    </p>
-                </div>
-            </a>
-            <a href="/pages/projects/uhdlapi.html" class="card">
-                <div class="grid">
-                    <img src="/images/uhdlapi/api.png" alt="submission approval page" />
-                </div>
-                <div class="card-content">
-                    <h2 class="card-title">UH Discord List API</h2>
-                    <p class="card-description">
-                        A description of the discord list API I created for Adam Nelson Archer's UH Discord List website.
-                    </p>
-                </div>
-            </a>
+      <a href="/pages/projects/cuda-solver.html" class="card">
+        <div class="grid">
+          <img src="/images/cuda-solver-images/publicdomaingraphicscard.jpg" alt="CUDA Solver thumbnail" loading="lazy" decoding="async" />
         </div>
-    </main>
-    <script src="/js/navbar.js?v=99" defer></script>
-
+        <div class="card-content">
+          <h2 class="card-title">Linearly Dense CUDA Solver</h2>
+          <p class="card-description">
+            A high-performance dense linear solver written in CUDA, built with classmates to accelerate GPU
+            matrix computations.
+          </p>
+        </div>
+      </a>
+      <a href="/pages/projects/greybird-chalk.html" class="card">
+        <div class="grid">
+          <img src="/images/Greybird-chalk-images/greybird-chalk.png" alt="Greybird-chalk thumbnail" loading="lazy" decoding="async" />
+        </div>
+        <div class="card-content">
+          <h2 class="card-title">Greybird-Chalk</h2>
+          <p class="card-description">
+            A recoloring of Greybird-dark to match a visual studio code and terminal theme
+          </p>
+        </div>
+      </a>
+      <a href="/pages/projects/uhdlapi.html" class="card">
+        <div class="grid">
+          <img src="/images/uhdlapi/api.png" alt="submission approval page" loading="lazy" decoding="async" />
+        </div>
+        <div class="card-content">
+          <h2 class="card-title">UH Discord List API</h2>
+          <p class="card-description">
+            A description of the discord list API I created for Adam Nelson Archer's UH Discord List website.
+          </p>
+        </div>
+      </a>
+    </div>
+  </main>
+  <script src="/js/navbar.js?v=99" defer></script>
 </body>
-
 </html>
